@@ -50,12 +50,13 @@ const Navigation = (NavigationProps: NavigationProps) => {
         styles.Navigation,
         props.className,
       ].join(" ")}
+      style={props.style}
     >
       {DropDownHeader &&
         DropDownHeader.length > 0 &&
-        DropDownHeader.map((item: any) => {
+        DropDownHeader.map((item: any, key:Key) => {
           return (
-            <div className={["col", styles.Drop].join(" ")}>
+            <div className={["col", styles.Drop].join(" ")} key={key}>
               <i
                 className={[
                   "row align-center justify-center",

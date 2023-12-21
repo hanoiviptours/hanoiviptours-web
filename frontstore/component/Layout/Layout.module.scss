@@ -26,6 +26,23 @@
   .openHeader {
     top: 0;
   }
+  .Navigation{
+    position: fixed;
+    padding: 10px;
+    background-color: $white;
+    box-shadow: 0 0 5px $black;
+    right: 0;
+    left: 0;
+    z-index: -1;
+    top:-100px;
+    height: 80px;
+    transition: 0.4s;
+  }
+  .openNavi{
+    z-index: 1;
+    top:80px;
+  }
+
   .SideDrawer {
     z-index: 2;
   }

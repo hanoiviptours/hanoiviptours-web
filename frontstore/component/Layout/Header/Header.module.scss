@@ -39,15 +39,15 @@
           display: none;
         }
         margin: 0 -20px;
+        padding-left: 20px;
         .WarpLink {
           position: relative;
-          padding: 0 20px;
+          padding: 0 15px;
           @include responsive_extra_large() {
             padding: 0 10px;
           }
           .Parent {
-            font-weight: 600;
-            font-size: 16px;
+            font-size: 18px;
             transition: 0.3s;
             cursor: pointer;
             .IconDown {
@@ -103,195 +103,21 @@
           }
         }
       }
-    }
-  }
-}
-
-.Bar {
-  .outBarButton {
-    @include responsive_large() {
-      display: none;
-    }
-    .BarButton {
-      background-color: $background-component !important;
-      color: $white !important;
-      font-size: 17px;
-      padding: 10px 0;
-      border: 1px solid transparent;
-      filter: drop-shadow(0px 3px 6px rgba($black, 16%));
-      width: 95%;
-    }
-  }
-  .Tool {
-    .IconButton {
-      font-size: 24px;
-      text-align: center;
-      position: relative;
-      .totalCard {
-        position: absolute;
-        top: -8px;
-        right: 3px;
-        border-radius: 50%;
-        background-color: $color-main;
-        color: $white;
-        width: 20px;
-        height: 20px;
-        font-size: 12px;
-        font-weight: 700;
-        .intotalCard {
-          position: absolute;
-          width: 20px;
-          top: 4px;
-          right: 0%;
-        }
-        @include responsive_medium() {
-          right: -3px;
-        }
-        @include responsive_small() {
-          right: -7px;
-        }
-      }
-      @include responsive_small() {
-        font-size: 18px;
-      }
-      @include responsive_mobile_m() {
-        font-size: 15px;
-      }
-      i {
-        cursor: pointer;
-        &:hover {
-          color: $background-component;
-        }
-        @include responsive_small() {
-          padding: 0 2px;
-        }
-        @include responsive_mobile_m() {
-          padding: 0 1px;
-        }
-      }
-      .Pop {
-        position: absolute;
-        min-height: max-content;
-        padding: 25px 25px 30px;
-        filter: drop-shadow(0px 3px 6px rgba($black, 30%));
-        background-color: $white;
-        min-width: 300px;
-        top: calc(100% + 45px);
-        right: -50%;
-        border-radius: 12px;
-        visibility: hidden;
-        transition: 0.3s;
-        opacity: 0;
-        z-index: 2;
-      }
-      .Search {
-        height: max-content;
-        &:before {
-          content: "";
-          position: absolute;
-          bottom: 100%;
-          right: 13%;
-          border-bottom: 10px solid $white;
-          border-left: 10px solid transparent;
-          border-right: 10px solid transparent;
-          z-index: 2;
-        }
-        .ButtonSearch {
-          height: 50px;
-          width: 50px;
-          font-size: 27px;
-        }
-        .inputSearch {
-          border: 2px solid $gray-1D;
-        }
-        .Cart::-webkit-scrollbar {
-          width: 5px;
-        }
-        .Cart::-webkit-scrollbar-thumb {
-          background-color: $lighter-gray;
-          border-radius: 3px;
-        }
-        .Cart::-webkit-scrollbar-track {
-          background-color: $white;
-        }
-        .Cart {
-          padding: 0 5px;
-          max-height: 270px;
-          overflow-y: scroll;
-          .productCart {
-            width: 100%;
-            border-bottom: 1px solid $gray-1D;
-            .outImage {
-              height: 70px;
-              width: 70px;
-              .img {
-                height: inherit;
-                width: inherit;
-                object-fit: fill;
-              }
-            }
-            .Content {
-              text-align: left;
-              .nameProduct {
-                font-size: 20px;
-                padding-bottom: 20px;
-                cursor: pointer;
-                &:hover {
-                  color: $text;
-                }
-              }
-              .totalProduct {
-                font-size: 17px;
-              }
+      .SignIn{
+        .inSignIn{
+          .linkSignUp{
+            padding: 0px 15px;
+            color: $green;
+            cursor: pointer;
+            &:hover{
+              text-decoration: underline;
             }
           }
-        }
-        .TotalPrice {
-          margin-top: 15px;
-          padding: 10px 5px;
-          border-bottom: 2px solid $gray-1D;
-          border-top: 2px solid $gray-1D;
-          font-size: 20px;
-          font-weight: 600;
-        }
-        .ButtonView {
-          margin: 10px 0;
-          height: 40px;
-          width: 100%;
-          background-color: $text;
-          font-size: 18px;
-          font-weight: 600;
-        }
-
-        .ButtonPay {
-          height: 40px;
-          width: 100%;
-          background-color: $background-component;
-          font-size: 18px;
-          font-weight: 600;
-        }
-        .titleCartNull {
-          font-size: 22px;
-        }
-
-        .linkLogin{
-          padding: 17px 10px;
-          font-size: 18px;
-          font-weight: 500;
-          cursor: pointer;
-          border-radius: 12px;
-          transition: 0.2s background-color;
-          &:hover{
-            color: $white;
-            background-color: $background-component;
+          .buttonSignIn{
+            width: 150px;
+            height: 35px;
+            font-size: 15px;
           }
-        }
-      }
-      &:hover {
-        .Pop {
-          top: calc(100% + 15px);
-          visibility: visible;
-          opacity: 1;
         }
       }
     }

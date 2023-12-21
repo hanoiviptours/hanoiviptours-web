@@ -14,6 +14,8 @@ const Layout = (LayoutProps: LayoutProps) => {
 
   const [open, setOpen] = useState(false);
 
+  const [openNavi, setOpenNavi] = useState(false);
+
   const [valueScroll, setValueScroll] = useState(0);
 
   //function to action
@@ -24,6 +26,7 @@ const Layout = (LayoutProps: LayoutProps) => {
 
   const handleOpen = () => {
     setOpen(!open);
+    setOpenNavi(false)
   };
 
   if (typeof window !== "undefined") {
@@ -31,14 +34,10 @@ const Layout = (LayoutProps: LayoutProps) => {
   }
 
   const navigation = [
-    { title: "Trang Chủ", link: "home" },
-    { title: "Về Chúng Tôi", link: "#" },
-    {
-      title: "Sản phẩm",
-      children: "KeyDown",
-    },
-    { title: "Tin Tức", link: "#" },
-    { title: "Liên Hệ", link: "#" },
+    { title: "Sản phẩm", children: "KeyDown" },
+    { title: "Về chúng tôi", link: "#" },
+    { title: "Trung tâm hỗ trợ", link: "#" },
+    { title: "Tra cứu đại lý", link: "#" },
   ];
 
   useEffect(() => {
@@ -55,12 +54,15 @@ const Layout = (LayoutProps: LayoutProps) => {
             <div
               className={["row", styles.rowChildrenDrawer].join(" ")}
               key={key}
+              onClick={() => {
+                item.children && item.children == "KeyDown";
+              }}
             >
-              {item.children&&item.children=="KeyD" ? (
-                <div onClick={()=>{handleOpenNavi()}}>{item.title.toLocaleUpperCase()}</div>
+              {item.children && item.children == "KeyDown" ? (
+                <div>{item.title}</div>
               ) : (
                 item.link && (
-                  <a href={item.link}>{item.title.toLocaleUpperCase()}</a>
+                  <a href={item.link}>{item.title}</a>
                 )
               )}
             </div>
@@ -71,30 +73,31 @@ const Layout = (LayoutProps: LayoutProps) => {
   };
 
   return (
-    <div
-      className={[styles.Layout].join(" ")}
-    >
-      {
-        <Header
-          className={[
-            styles.HeaderScroll,
-            styles.openHeader,
-          ].join(" ")}
-          navigation={navigation}
-          onClickDrawer={() => {
-            handleOpen();
-          }}
-          style={
-            open
-              ? {
-                  zIndex: "1",
-                }
-              : {
-                  zIndex: "2",
-                }
-          }
+    <div className={[styles.Layout].join(" ")}>
+      <Header
+        className={[styles.HeaderScroll, styles.openHeader].join(" ")}
+        navigation={navigation}
+        openNavi={() => {
+          setOpenNavi(!openNavi);
+        }}
+        onClickDrawer={() => {
+          handleOpen();
+        }}
+        style={
+          open
+            ? {
+                zIndex: "1",
+              }
+            : {
+                zIndex: "2",
+              }
+        }
+      />
+      {openNavi && (
+        <Navigation
+          className={[styles.Navigation,openNavi&&styles.openNavi].join(" ")}
         />
-      }
+      )}
 
       <div>{props.children}</div>
       <Footer />

@@ -2,6 +2,7 @@ import { useState, useEffect, Key } from "react";
 import styles from "./Header.module.scss";
 import Image from "next/image";
 import { Logo } from "../../../public/images";
+import { Button } from "../../Button";
 
 interface navigation {
   title: string;
@@ -10,24 +11,21 @@ interface navigation {
 }
 export type HeaderProps = {
   navigation: navigation[];
-  onClickDrawer?: () => void;
   className?: string;
+  onClickDrawer?: () => void;
+  openNavi?: () => void;
   style?: any;
 };
 
 const Header = (HeaderProps: HeaderProps) => {
   //Define constant
   const [props, setProps] = useState(HeaderProps);
-  const [openNavi, setOpenNavi] = useState(false)
+  const Authen: boolean = false;
 
   //Funtion to action
 
   const handleOpen = () => {
     props.onClickDrawer && props.onClickDrawer();
-  };
-
-  const handleOpenNavi = () => {
-    setOpenNavi(!open);
   };
 
   //Funtion to create
@@ -60,10 +58,17 @@ const Header = (HeaderProps: HeaderProps) => {
   };
 
   const renderSignIn = () => {
-    return(
-      <div className={["col-3"].join(" ")}>{/* <Bar /> */}</div>
-    )
-  }
+    return (
+      <div className={["col-3", styles.SignIn].join(" ")}>
+        <div
+          className={["row align-center justify-end", styles.inSignIn].join(" ")}
+        >
+          <div className={[styles.linkSignUp].join(" ")}>Đăng ký</div>
+          <Button className={[styles.buttonSignIn].join(" ")} children={"Đăng nhập"} color="fill"/>
+        </div>
+      </div>
+    );
+  };
 
   const renderHeader = () => {
     return (
@@ -84,12 +89,21 @@ const Header = (HeaderProps: HeaderProps) => {
               props.navigation.length > 0 &&
               props.navigation.map((item: navigation, key: Key) => {
                 return (
-                  <div className={[styles.WarpLink].join(" ")} key={key}>
+                  <div
+                    className={[styles.WarpLink].join(" ")}
+                    key={key}
+                    onClick={() => {
+                      item.children &&
+                        item.children == "KeyDown" &&
+                        props.openNavi &&
+                        props.openNavi();
+                    }}
+                  >
                     <a href={item.link} className={styles.Parent}>
-                      {item.title.toLocaleUpperCase()}
-                      {item.children && item.children=="KeyDown" && (
+                      {item.title}
+                      {item.children && item.children == "KeyDown" && (
                         <span className={styles.IconDown}>
-                          <i className="bi bi-chevron-down"></i>
+                          <i className="bi bi-caret-down-fill"></i>
                         </span>
                       )}
                     </a>
@@ -100,7 +114,6 @@ const Header = (HeaderProps: HeaderProps) => {
           {/* SignIn/SignUp */}
           {renderSignIn()}
         </div>
-        
       </div>
     );
   };

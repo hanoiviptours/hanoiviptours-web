@@ -32,7 +32,6 @@ const SideDrawer = (SideDrawerProps: SideDrawerProps) => {
   //main render
   return (
     <>
-      
       <div
         className={[
           SideDrawerProps.isOpen ? styles.ShowSideBar : "",
