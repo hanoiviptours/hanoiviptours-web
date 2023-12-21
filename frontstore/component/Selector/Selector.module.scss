@@ -1,0 +1,26 @@
+@import "../../styles/mixins";
+@import "../../styles/variables";
+
+
+.Selector {
+  padding: 0 10px;
+  .Options {
+    .selectOptions {
+      height: 35px;
+      width: max-content;
+      border-bottom: 3px solid $background;
+      font-size: 17px;
+      font-weight: 600;
+      padding-top: 10px;
+      cursor: pointer;
+      &:hover {
+      }
+      .NameOption {
+        padding: 0 15px;
+      }
+    }
+  }
+  .Children {
+    padding-top: 10px;
+  }
+}

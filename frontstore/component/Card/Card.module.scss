@@ -1,0 +1,372 @@
+@import "../../styles/mixins";
+@import "../../styles/variables";
+
+.outCard {
+  position: relative;
+  padding: 10px;
+  .News {
+    border-radius: 21px;
+    height: inherit;
+    overflow: hidden;
+    cursor: pointer;
+    position: relative;
+    width: 80%;
+    transform: translate(10%,0);
+    .FameImage {
+      height: 45%;
+      position: relative;
+      overflow: hidden;
+      justify-items: center;
+      margin-bottom: -5px;
+      .backgroundImg {
+        position: absolute;
+        width: 100%;
+        bottom: 0;
+        height: 50%;
+        background-color: $background-component;
+        @include responsive_small() {
+          height: 35%;
+        }
+      }
+      .outImage {
+        height: 135px;
+        width: 135px;
+        border-radius: 50%;
+        margin: 0 auto;
+        border: 3px solid $background-component;
+        overflow: hidden;
+        margin-top: 30px;
+        @include responsive_extra_large() {
+          height: 115px;
+          width: 115px;
+          margin-top: 45px;
+        }
+        @include responsive_small() {
+          height: 95px;
+          width: 95px;
+          margin-top: 80px;
+        }
+        @include responsive_mobile_l() {
+          height: 60px;
+          width: 60px;
+          margin-top: 100px;
+        }
+        .img {
+          width: 100%;
+          height: inherit;
+          object-fit: scale-down;
+          z-index: 1;
+          background-color: $white;
+        }
+      }
+      .soldOut {
+        display: none;
+      }
+    }
+    .FameContent {
+      height: 55%;
+      background-color: $background-component;
+      width: 80%;
+      padding: 0 10%;
+      padding-bottom: 30px;
+      .outLineDocs {
+        padding: 5px 0;
+        .lineDocs {
+          width: 50%;
+        }
+      }
+      .nameCard {
+        padding-top: 15px;
+        padding-bottom: 11px;
+        font-size: 17px;
+        height: 5rem;
+        @include max-lines(4, 1.3);
+        @include responsive_extra_large() {
+          padding-top: 5px;
+        }
+        @include responsive_small() {
+          font-size: 13px;
+          line-height: 20px;
+          padding-bottom: 0px;
+        }
+        @include responsive_mobile_l() {
+          padding-top: 5px;
+          padding-bottom: 0px;
+        }
+      }
+      .Content {
+        font-size: 17px;
+        height: 7rem;
+        padding-bottom: 10px;
+        @include max-lines(7, 1.2);
+        @include responsive_small() {
+          font-size: 13px;
+          line-height: 18px;
+          margin-top:10px;
+        }
+      }
+      .voteCard {
+        display: none;
+      }
+      .price {
+        display: none;
+      }
+    }
+  }
+  .Docs {
+    box-shadow: 0 0 3px $black;
+    border-radius: 9px;
+    height: inherit;
+    overflow: hidden;
+    cursor: pointer;
+    position: relative;
+    .FameImage {
+      height: 45%;
+      position: relative;
+      overflow: hidden;
+      .outImage {
+        height: 100%;
+        width: 100%;
+        transition-duration: 0.5s;
+        .img {
+          width: inherit;
+          height: inherit;
+          object-fit: fill;
+        }
+      }
+      .soldOut {
+        display: none;
+      }
+    }
+    .FameContent {
+      height: 55%;
+      background-color: $white;
+      width: 90%;
+      padding: 0 5%;
+      padding-bottom: 70px;
+      .outLineDocs {
+        padding: 5px 0;
+        .lineDocs {
+          width: 50%;
+        }
+      }
+      .nameCard {
+        padding-top: 15px;
+        font-size: 17px;
+        font-weight: 600;
+        height: 3rem;
+        @include max-lines(2, 1.3);
+        @include responsive_small() {
+          font-size: 13px;
+        }
+      }
+      .Content {
+        font-size: 13px;
+        font-weight: 600;
+        line-height: 15px;
+        height: 3rem;
+        @include max-lines(3, 1.3);
+        @include responsive_small() {
+          font-size: 12px;
+        }
+      }
+      .voteCard {
+        display: none;
+      }
+      .price {
+        display: none;
+      }
+    }
+    .ButtonMoreCard {
+      position: absolute;
+      width: 90%;
+      padding: 15px 5%;
+      bottom: 0px;
+      background-color: $white;
+      .inButtonMoreCard {
+        height: 40px;
+        width: 130px;
+        font-size: 16px;
+        font-weight: 600;
+        box-shadow: none;
+        border-radius: 3px;
+        @include responsive_small() {
+          height: 20px;
+          width: 90px;
+          font-size: 12px;
+        }
+      }
+    }
+    &:hover {
+      box-shadow: 0 0 5px $black;
+    }
+  }
+  .Image {
+    height: inherit;
+    overflow: hidden;
+    cursor: pointer;
+    .FameImage {
+      height: 60%;
+      position: relative;
+      overflow: hidden;
+      border-radius: 21px;
+      border: 3px solid $white;
+      .outImage {
+        height: 100%;
+        width: 100%;
+        transition-duration: 0.5s;
+        .img {
+          width: inherit;
+          height: inherit;
+          object-fit: fill;
+        }
+      }
+      .soldOut {
+        display: none;
+      }
+    }
+    .FameContent {
+      height: 40%;
+      .nameCard {
+        color: $white;
+        padding-top: 10px;
+        padding-bottom: 15px;
+        font-size: 18px;
+        font-weight: 600;
+        text-align: center;
+        @include max-lines(2, 1.3);
+        @include responsive_small() {
+          font-size: 14px;
+        }
+      }
+      .voteCard {
+        display: none;
+      }
+      .price {
+        display: none;
+      }
+    }
+  }
+
+  .Product {
+    box-shadow: 0 0 3px $black;
+    border-radius: 9px;
+    height: inherit;
+    overflow: hidden;
+    cursor: pointer;
+    .FameImage {
+      height: 60%;
+      position: relative;
+      overflow: hidden;
+      .outImage {
+        height: 100%;
+        width: 100%;
+        transition-duration: 0.5s;
+        .img {
+          width: inherit;
+          height: inherit;
+          object-fit: fill;
+        }
+      }
+      .soldOut {
+        position: absolute;
+        width: 100%;
+        height: 25%;
+        top: 40%;
+        font-size: 16px;
+        font-weight: 600;
+        background-color: $white;
+        opacity: 0.8;
+        @include responsive_small() {
+          font-size: 13px;
+        }
+      }
+    }
+    .FameContent {
+      height: 40%;
+      background-color: $white;
+      .nameCard {
+        width: 90%;
+        padding: 0 5%;
+        padding-top: 25px;
+        padding-bottom: 10px;
+        line-height: 15px;
+        font-size: 14px;
+        font-weight: 600;
+        height: 1rem;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        @include responsive_small() {
+          font-size: 12px;
+          padding-top: 20px;
+          padding-bottom: 5px;
+        }
+      }
+      .voteCard {
+        height: 1rem;
+        width: 90%;
+        padding: 0 5%;
+      }
+      .price {
+        width: 90%;
+        padding: 0 5%;
+        height: 2rem;
+        text-align: center;
+        @include max-lines(2, 1.2);
+        padding: 10px 0;
+        .defaultPrice {
+          font-size: 15px;
+          font-weight: 600;
+          opacity: 0.4;
+          text-decoration: line-through;
+          margin-right: 6px;
+          @include responsive_small() {
+            font-size: 11px;
+          }
+        }
+        .discountPrice {
+          font-size: 17px;
+          font-weight: 600;
+          color: $red;
+          @include responsive_small() {
+            font-size: 13px;
+          }
+        }
+      }
+    }
+    &:hover {
+      box-shadow: 0 0 5px $black;
+      .outImage {
+        transform: scale(1.1);
+      }
+    }
+  }
+  .tagSale {
+    position: absolute;
+    top: 10%;
+    left: 3px;
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    background-color: $color-main;
+    z-index: 1;
+    .inTagSale {
+      text-align: center;
+      width: 100%;
+      font-weight: 600;
+      font-size: 17px;
+      color: $white;
+      transform: translate(0, 75%);
+    }
+    @include responsive_small() {
+      width: 40px;
+      height: 40px;
+      top: 12%;
+      .inTagSale {
+        font-size: 15px;
+        transform: translate(0, 75%);
+      }
+    }
+  }
+}

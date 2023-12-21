@@ -1,0 +1,187 @@
+@import "../../../styles/mixins";
+@import "../../../styles/variables";
+
+
+.Footer {
+  background-color: $background-component;
+  color: $white;
+  .inFooter {
+    .outContent {
+      padding: 30px;
+      .Content {
+        .Title {
+          width: max-content;
+          font-size: 25px;
+          font-weight: 700;
+          border-bottom: 4px solid $white;
+          padding-bottom: 10px;
+        }
+        .ChildrenContent {
+          .titlebAbUs {
+            font-size: 27px;
+            padding: 20px 0;
+            font-style: italic;
+          }
+          .contentAbUs {
+            font-size: 18px;
+            font-style: italic;
+            height: 15.3rem;
+            @include max-lines(10, 1.5);
+            padding-right: 80px;
+            @include responsive_medium() {
+              padding-right: 0px;
+            }
+            @include responsive_large() {
+              font-size: 15px;
+              padding-right: 65px;
+            }
+          }
+          .optionPolicy {
+            font-size: 20px;
+            margin: 30px 0;
+            cursor: pointer;
+            &:hover {
+              color: $black;
+            }
+            @include max-lines(10, 1.5);
+            padding-right: 20px;
+            @include responsive_large() {
+              font-size: 18px;
+              margin: 20px 0;
+            }
+            @include responsive_medium() {
+              padding-right: 0px;
+            }
+          }
+          .optionInfor {
+            margin: 35px 0;
+            &:hover {
+              color: $black;
+            }
+            .iconInfor {
+              font-size: 30px;
+            }
+            .textInfor {
+              width: 85%;
+              padding-left: 10px;
+              font-size: 19px;
+              line-height: 20px;
+            }
+            @include responsive_large() {
+              font-size: 18px;
+              margin: 20px 0;
+              .iconInfor {
+                font-size: 25px;
+              }
+              .textInfor {
+                width: 85%;
+                padding-left: 7px;
+                font-size: 17px;
+              }
+            }
+          }
+        }
+      }
+    }
+    .socialMedia {
+      padding-left: 30px;
+      padding-right: 30px;
+      .logo {
+        img {
+          height: 120px;
+          width: auto;
+          padding-right: 20px;
+          @include responsive_extra_large() {
+            height: 90px;
+            padding-right: 10px;
+          }
+          @include responsive_small() {
+            height: 60px;
+          }
+        }
+        .contentLogo {
+          @include responsive_large() {
+            display: none;
+          }
+          @include responsive_medium() {
+            display: unset;
+          }
+          .titleLogo {
+            font-size: 38px;
+            font-weight: 600;
+            padding: 5px 0;
+            @include responsive_extra_large() {
+              font-size: 30px;
+            }
+            @include responsive_small() {
+              font-size: 17px;
+            }
+          }
+          .contentLogo {
+            font-size: 20px;
+            max-width: 200px;
+            @include responsive_extra_large() {
+              font-size: 17px;
+              max-width: 170px;
+            }
+            @include responsive_small() {
+              display: none;
+            }
+          }
+        }
+      }
+      .media {
+        .outLinkMedia {
+          border-radius: 6px;
+          height: 40px;
+          overflow: hidden;
+          padding: 0;
+          @include responsive_large() {
+            height: 30px;
+          }
+          @include responsive_medium() {
+            margin-bottom: 10px;
+          }
+          @include responsive_small() {
+            border-radius: 0px;
+          }
+          .outImageMedia {
+            height: 40px;
+            width: 40px;
+            @include responsive_large() {
+              height: 30px;
+              width: 30px;
+            }
+            .imgMedia {
+              height: inherit;
+              width: inherit;
+              object-fit: fill;
+              background-color: $white;
+              border-radius: 6px;
+            }
+          }
+          .textLink {
+            padding: 12px 5px;
+            border-radius: 0 6px 6px 0;
+            height: max-content;
+            background-color: $color-main;
+            max-width: 180px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            @include responsive_extra_large() {
+              max-width: 160px;
+            }
+            @include responsive_large() {
+              max-width: 130px;
+              font-size: 12px;
+              padding: 10px 5px;
+            }
+            @include responsive_small() {
+              display: none;
+            }
+          }
+        }
+      }
+    }
+  }
+}

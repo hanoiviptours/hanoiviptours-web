@@ -1,0 +1,19 @@
+@import "../../styles/variables";
+
+.DropDownHeader {
+  height: 100px;
+  .Drop{
+    padding: 10px 0;
+    border-radius: 6px;
+    cursor: pointer;
+    &:hover{
+      background-color: $anti-white;
+    }
+    .icon{
+      height: 45px;
+      font-size: 25px;
+    }
+    .Title{
+    }
+  }
+}

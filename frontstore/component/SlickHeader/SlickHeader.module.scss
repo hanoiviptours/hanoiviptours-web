@@ -1,0 +1,146 @@
+@import "../../styles/mixins";
+@import "../../styles/variables";
+
+
+.SlickHeader {
+  width: 100%;
+  background-color: $background-component;
+  .Slick {
+    position: relative;
+    width: 100%;
+    .arrow .next {
+      position: absolute;
+      top: 50%;
+      width: 40px;
+      height: 40px;
+      color: $white;
+      align-items: center;
+      justify-content: center;
+      right: 10px;
+      font-size: 40px;
+      cursor: pointer;
+      z-index: 1;
+    }
+
+    .arrow .prev {
+      position: absolute;
+      top: 50%;
+      width: 40px;
+      height: 40px;
+      color: $white;
+      align-items: center;
+      justify-content: center;
+      left: 10px;
+      font-size: 40px;
+      cursor: pointer;
+      z-index: 1;
+    }
+
+    .next,.prev {
+      display: none;
+    }
+
+    .outImage {
+      width: 100%;
+      .Image {
+        width: inherit;
+        object-fit: fill;
+      }
+    }
+    :global {
+      .slick-dots {
+        bottom: 20px;
+      }
+      .slick-dots li button:before {
+        font-size: 15px;
+        color: $background-component;
+      }
+      .slick-dots li.slick-active button:before {
+        color: $background-component;
+      }
+    }
+    &:hover{
+      .next,.prev {
+        display: flex;
+      }
+    }
+    @include responsive_large() {
+      display: none;
+    }
+  }
+  .ButtonLink {
+    width: 100%;
+    .Button {
+      cursor: pointer;
+      color: $white;
+      .outIcon {
+        padding-left: 25px;
+        padding-right: 10px;
+        @include responsive_medium() {
+          padding-left: 15px;
+          padding-right: 7px;
+        }
+        @include responsive_small() {
+          padding-left: 5px;
+          padding-right: 3px;
+          margin-top: -1px;
+        }
+        .icon {
+          font-size: 37px;
+          @include responsive_large() {
+            font-size: 28px;
+          }
+          @include responsive_medium() {
+            font-size: 20px;
+          }
+          @include responsive_small() {
+            font-size: 15px;
+          }
+        }
+        @include responsive_mobile_l() {
+          padding-left: 2px;
+          padding-right: 2px;
+        }
+      }
+      .content {
+        .Title {
+          font-weight: 600;
+          font-style: italic;
+          font-size: 16px;
+        }
+        .subTitle {
+          font-style: italic;
+          font-size: 16px;
+          padding-top: 3px;
+        }
+        @include responsive_large() {
+          .Title {
+            font-size: 12px;
+          }
+          .subTitle {
+            font-size: 12px;
+            padding-top: 2px;
+          }
+        }
+        @include responsive_medium() {
+          .Title {
+            font-size: 8px;
+          }
+          .subTitle {
+            font-size: 8px;
+            padding-top: 1px;
+          }
+        }
+        @include responsive_small() {
+          .Title {
+            font-size: 6px;
+          }
+          .subTitle {
+            font-size: 6px;
+            padding-top: 1px;
+          }
+        }
+      }
+    }
+  }
+}

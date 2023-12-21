@@ -1,0 +1,58 @@
+@import "../../styles/mixins";
+@import "../../styles/variables";
+
+
+.Layout {
+  position: relative;
+  .HeaderScroll {
+    position: fixed;
+    right: 0;
+    left: 0;
+    height: 120px;
+    opacity: 0.9;
+    transition: 1s;
+    @include responsive_large() {
+      height: 95px;
+    }
+    @include responsive_small() {
+      opacity: 1;
+    }
+    @include responsive_mobile_l() {
+      height: 73px;
+    }
+    @include responsive_mobile_m() {
+      height: 63px;
+    }
+  }
+  .clossHeader {
+    top: -100%;
+    z-index: -3;
+  }
+  .openHeader {
+    top: 0;
+  }
+  .SideDrawer {
+    z-index: 2;
+  }
+  .SideDrawer {
+    .ChildrenDrawer {
+      padding: 20px;
+      .rowChildrenDrawer {
+        padding: 20px 0;
+        font-weight: 600;
+        cursor: pointer;
+        .Dropdown {
+          .children {
+            padding-top: 10px;
+            padding-left: 15px;
+            font-weight: 500;
+            .optionChildren {
+              padding: 10px 0;
+              cursor: pointer;
+            }
+          }
+        }
+      }
+    }
+  }
+}

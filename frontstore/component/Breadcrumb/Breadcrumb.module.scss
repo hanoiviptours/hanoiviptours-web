@@ -1,0 +1,15 @@
+@import "../../styles/mixins";
+@import "../../styles/variables";
+
+.Breadcrumb {
+  .Divider {
+    margin: 0 0.3rem;
+    color: $gray;
+  }
+  .Link:last-child {
+    color: $textOrange;
+  }
+  .Link:hover{
+    color:$textOrange;
+  }
+}

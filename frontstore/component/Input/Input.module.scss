@@ -1,0 +1,109 @@
+@import "../../styles/mixins";
+@import "../../styles/variables";
+
+
+.Input {
+  border: 1px solid;
+
+  box-shadow: 0 0 1px $gray;
+  overflow: hidden;
+
+  &:focus-within {
+    box-shadow: 0 0 8px $inputFocus;
+    /* Larger box-shadow on focus-within */
+  }
+
+  .Clear {
+    color: $black;
+    padding-right: 5px;
+    cursor: pointer;
+
+    &:hover {
+      color: $gray;
+    }
+  }
+
+  .Text {
+    padding: 0px 10px;
+    height: 100%;
+    width: 100%;
+    border: none;
+    outline: none;
+    flex: 1;
+    font-size: 1rem;
+    margin-left: 5px;
+
+    &_number::-webkit-outer-spin-button,
+    &_number::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+  }
+
+  .TotalCard {
+    display: flex;
+    width: max-content;
+    border: 1px solid $gray-1D;
+    border-radius: 3px;
+
+    @include responsive_extra_extra_large() {
+      height: 40px;
+    }
+
+    .Minus,
+    .Plus {
+      border-radius: 0px;
+      border: none;
+      background-color: $background-default;
+
+      &:active {
+        background-color: $gray;
+      }
+    }
+
+    .Minus {
+      margin-right: 0.5px;
+      border-right: 2px solid $gray-1D;
+    }
+
+    .Plus {
+      border-left: 2px solid $gray-1D;
+    }
+
+    .outInputTotal {
+      background-color: $white;
+      margin-left: 1px;
+      margin-right: 1px;
+      padding-right: 5px;
+      width: 40px;
+
+      @include responsive_extra_extra_large() {
+        width: 30px;
+      }
+
+      .inputTotal {
+        width: inherit;
+
+        text-align: center;
+        font-size: 20px;
+
+        border: none;
+
+        &_totalCard::-webkit-outer-spin-button,
+        &_totalCard::-webkit-inner-spin-button {
+          -webkit-appearance: none;
+        }
+      }
+    }
+  }
+}
+
+.Shape {
+  &_standard {
+    border-radius: 5px;
+  }
+}
+
+.Input:focus-visible {
+  border: 1px;
+}

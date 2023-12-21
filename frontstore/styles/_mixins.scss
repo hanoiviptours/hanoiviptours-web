@@ -1,0 +1,95 @@
+// Mixins
+@mixin FontUltraThin() {
+  font-family: $FontUltraThin;
+}
+
+@mixin FontThin() {
+  font-family: $FontThin;
+}
+
+@mixin FontLight() {
+  font-family: $FontLight;
+}
+
+@mixin FontRoman() {
+  font-family: $FontRoman;
+}
+
+@mixin FontMedium() {
+  font-family: $FontMedium;
+}
+
+@mixin FontBold() {
+  font-family: $FontBold;
+}
+
+//responsive mixin
+$extra_extra_large: "only screen and (max-width: 1400px)";
+$extra_large: "only screen and (max-width: 1200px)";
+$large: "only screen and (max-width: 992px)";
+$medium: "only screen and (max-width: 768px)";
+$small: "only screen and (max-width: 576px)";
+$mobile_l: "only screen and (max-width: 376px)";
+$mobile_m: "only screen and (max-width: 321px)";
+
+@mixin responsive_extra_extra_large() {
+  @media #{$extra_extra_large} {
+    @content;
+  }
+}
+
+@mixin responsive_extra_large() {
+  @media #{$extra_large} {
+    @content;
+  }
+}
+
+@mixin responsive_large() {
+  @media #{$large} {
+    @content;
+  }
+}
+
+@mixin responsive_medium() {
+  @media #{$medium} {
+    @content;
+  }
+}
+
+@mixin responsive_small() {
+  @media #{$small} {
+    @content;
+  }
+}
+
+@mixin responsive_mobile_l() {
+  @media #{$mobile_l} {
+    @content;
+  }
+}
+
+@mixin responsive_mobile_m() {
+  @media #{$mobile_m} {
+    @content;
+  }
+}
+
+@mixin column() {
+  display: flex;
+  flex-direction: column;
+}
+
+@mixin row() {
+  display: flex;
+  flex-direction: row;
+}
+
+@mixin max-lines($lines, $line-height) {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: $lines;
+  line-height: $line-height;
+  max-height: $line-height * $lines;
+}

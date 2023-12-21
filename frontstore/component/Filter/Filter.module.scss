@@ -1,0 +1,33 @@
+@import "../../styles/mixins";
+@import "../../styles/variables";
+
+
+.Filter {
+  display: flex;
+  flex-direction: column;
+  .Title {
+    font-size: 1em;
+    font-weight: 600;
+  }
+  .Divider {
+    height: 3px;
+    background-color: rgba(0, 0, 0, 0.1);
+    margin: 0.6em 0 0.6em;
+    width: 100%;
+    max-width: 30px;
+  }
+  .List {
+    padding: 3px 0;
+    &:hover {
+      color: $textOrange;
+      transition: 0.2s;
+    }
+    margin-top: 10px;
+  }
+  .Focus {
+    padding: 3px 0;
+    color: $black;
+    font-weight: bolder;
+    margin-top: 10px;
+  }
+}

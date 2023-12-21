@@ -1,0 +1,56 @@
+@import "../../styles/variables";
+
+.Home {
+  .SlickHeader {
+    padding: 5px;
+    padding-bottom: 20px;
+
+    .DivSlickHeader {
+      .CardHeader{
+        height: 500px;
+      }
+    }
+  }
+
+  .ChosenForYou,
+  .JustDropped,
+  .BeautyOffers {
+    padding: 10px;
+  }
+  .DivBanner{
+    height: 200px;
+  }
+  .DivSlick2 {
+    padding: 3px;
+    .InDivSlick2{
+      height: 270px;
+    }
+    .InDivSlick3{
+      height: 400px;
+    }
+    .InDivSlick4{
+      height: 320px;
+    }
+    &:hover {
+      transform: translateY(-7px);
+      transition: 0.3s;
+    }
+  }
+
+  .Slick3 {
+    padding: 5px;
+  }
+
+  .Text {
+    padding: 12px;
+    font-weight: 700;
+  }
+
+  .Card3 {
+    padding-top: 25px;
+    padding-bottom: 25px;
+  }
+}
+.InDivSlick4{
+  height: 130px;
+}
