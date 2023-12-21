@@ -4,6 +4,7 @@ import Footer from "./Footer";
 import { useRouter } from "next/router";
 import styles from "./Layout.module.scss";
 import { Dropdown, SideDrawer } from "..";
+import Navigation from "../Navigation/Navigation";
 
 type LayoutProps = {
   children: ReactNode;
@@ -12,9 +13,6 @@ const Layout = (LayoutProps: LayoutProps) => {
   const [props, setProps] = useState(LayoutProps);
 
   const [open, setOpen] = useState(false);
-
-  const router = useRouter();
-  const filterLink = router.asPath.replace("/", "");
 
   const [valueScroll, setValueScroll] = useState(0);
 
@@ -37,12 +35,7 @@ const Layout = (LayoutProps: LayoutProps) => {
     { title: "Về Chúng Tôi", link: "#" },
     {
       title: "Sản phẩm",
-      children: [
-        { title: "Đặc sản Tây Bắc", link: "1" },
-        { title: "Đặc sản Tây Bắc", link: "2" },
-        { title: "Đặc sản Tây Bắc", link: "3" },
-        { title: "Đặc sản Tây Bắc", link: "4" },
-      ],
+      children: "KeyDown",
     },
     { title: "Tin Tức", link: "#" },
     { title: "Liên Hệ", link: "#" },
@@ -63,28 +56,8 @@ const Layout = (LayoutProps: LayoutProps) => {
               className={["row", styles.rowChildrenDrawer].join(" ")}
               key={key}
             >
-              {item.children ? (
-                <Dropdown
-                  className={styles.Dropdown}
-                  classNameTitle={styles.Title}
-                  title={item.title.toLocaleUpperCase()}
-                  classNameChildren={styles.children}
-                  children={
-                    <>
-                      {item.children.map((el: any, reKey: Key) => {
-                        return (
-                          <div
-                            className={["row", styles.optionChildren].join(" ")}
-                            key={reKey}
-                          >
-                            <a href={el.link}>{el.title}</a>
-                          </div>
-                        );
-                      })}
-                    </>
-                  }
-                  mode={"drop"}
-                />
+              {item.children&&item.children=="KeyD" ? (
+                <div onClick={()=>{handleOpenNavi()}}>{item.title.toLocaleUpperCase()}</div>
               ) : (
                 item.link && (
                   <a href={item.link}>{item.title.toLocaleUpperCase()}</a>
@@ -100,25 +73,12 @@ const Layout = (LayoutProps: LayoutProps) => {
   return (
     <div
       className={[styles.Layout].join(" ")}
-      style={{
-        overflow: "hidden",
-        backgroundColor:
-          filterLink == "home" || filterLink == "" ? "#ffedd9" : "",
-      }}
     >
-      {
-        <Header
-          navigation={navigation}
-          onClickDrawer={() => {
-            handleOpen();
-          }}
-        />
-      }
       {
         <Header
           className={[
             styles.HeaderScroll,
-            valueScroll > 148 ? styles.openHeader : styles.clossHeader,
+            styles.openHeader,
           ].join(" ")}
           navigation={navigation}
           onClickDrawer={() => {
@@ -128,13 +88,9 @@ const Layout = (LayoutProps: LayoutProps) => {
             open
               ? {
                   zIndex: "1",
-                  backgroundColor:
-                    filterLink == "home" || filterLink == "" ? "white" : "",
                 }
               : {
                   zIndex: "2",
-                  backgroundColor:
-                    filterLink == "home" || filterLink == "" ? "white" : "",
                 }
           }
         />

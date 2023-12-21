@@ -6,7 +6,7 @@ import { Logo } from "../../../public/images";
 interface navigation {
   title: string;
   link?: string;
-  children?: navigation[];
+  children?: any;
 }
 export type HeaderProps = {
   navigation: navigation[];
@@ -18,10 +18,16 @@ export type HeaderProps = {
 const Header = (HeaderProps: HeaderProps) => {
   //Define constant
   const [props, setProps] = useState(HeaderProps);
-  const [size, setSize] = useState("large");
+  const [openNavi, setOpenNavi] = useState(false)
+
+  //Funtion to action
 
   const handleOpen = () => {
     props.onClickDrawer && props.onClickDrawer();
+  };
+
+  const handleOpenNavi = () => {
+    setOpenNavi(!open);
   };
 
   //Funtion to create
@@ -53,6 +59,12 @@ const Header = (HeaderProps: HeaderProps) => {
     );
   };
 
+  const renderSignIn = () => {
+    return(
+      <div className={["col-3"].join(" ")}>{/* <Bar /> */}</div>
+    )
+  }
+
   const renderHeader = () => {
     return (
       <div className={["container", styles.Header_large].join(" ")}>
@@ -75,30 +87,20 @@ const Header = (HeaderProps: HeaderProps) => {
                   <div className={[styles.WarpLink].join(" ")} key={key}>
                     <a href={item.link} className={styles.Parent}>
                       {item.title.toLocaleUpperCase()}
-                      {item.children && item.children.length > 0 && (
+                      {item.children && item.children=="KeyDown" && (
                         <span className={styles.IconDown}>
                           <i className="bi bi-chevron-down"></i>
                         </span>
                       )}
                     </a>
-                    {item.children && item.children.length > 0 && (
-                      <div className={styles.Children}>
-                        {item.children.map((el: navigation, reKey: Key) => {
-                          return (
-                            <div className={styles.LinkChildren} key={reKey}>
-                              <a href={item.link}>{el.title}</a>
-                            </div>
-                          );
-                        })}
-                      </div>
-                    )}
                   </div>
                 );
               })}
           </div>
           {/* SignIn/SignUp */}
-          <div className={["col-3"].join(" ")}>{/* <Bar /> */}</div>
+          {renderSignIn()}
         </div>
+        
       </div>
     );
   };

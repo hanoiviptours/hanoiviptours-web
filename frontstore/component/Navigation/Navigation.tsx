@@ -2,7 +2,12 @@ import React, { Key, useEffect, useState } from "react";
 import styles from "./Navigation.module.scss";
 
 
-const Navigation = () => {
+export type NavigationProps = {
+  className?: string;
+  style?: any;
+};
+const Navigation = (NavigationProps: NavigationProps) => {
+  const [props, setProps] = useState(NavigationProps);
   const DropDownHeader = [
     { icon: "bi bi-airplane-fill", title: "Vé máy bay", link: "#", color: "#0f8f03" },
     { icon: "bi bi-columns", title: "Khách sạn", link: "#", color: "#e60909" },
@@ -34,12 +39,16 @@ const Navigation = () => {
     },
   ];
 
+  useEffect(() => {
+    setProps(NavigationProps);
+  }, [NavigationProps]);
 
   return (
     <div
       className={[
         "row align-center justify-center",
         styles.Navigation,
+        props.className,
       ].join(" ")}
     >
       {DropDownHeader &&

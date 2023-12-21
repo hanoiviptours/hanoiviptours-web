@@ -8,8 +8,7 @@
     position: fixed;
     right: 0;
     left: 0;
-    height: 120px;
-    opacity: 0.9;
+    height: 80px;
     transition: 1s;
     @include responsive_large() {
       height: 95px;
@@ -23,10 +22,6 @@
     @include responsive_mobile_m() {
       height: 63px;
     }
-  }
-  .clossHeader {
-    top: -100%;
-    z-index: -3;
   }
   .openHeader {
     top: 0;
