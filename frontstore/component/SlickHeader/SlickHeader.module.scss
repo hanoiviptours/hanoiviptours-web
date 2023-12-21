@@ -53,10 +53,10 @@
       }
       .slick-dots li button:before {
         font-size: 15px;
-        color: $background-component;
+        color: $white;
       }
       .slick-dots li.slick-active button:before {
-        color: $background-component;
+        color: $white;
       }
     }
     &:hover{

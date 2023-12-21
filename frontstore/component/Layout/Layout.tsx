@@ -99,7 +99,7 @@ const Layout = (LayoutProps: LayoutProps) => {
         />
       )}
 
-      <div>{props.children}</div>
+      <div className={[styles.children].join(" ")}>{props.children}</div>
       <Footer />
       <SideDrawer
         className={[styles.SideDrawer].join(" ")}

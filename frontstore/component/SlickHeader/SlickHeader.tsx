@@ -6,8 +6,13 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Navigation from "../Navigation/Navigation";
 
+interface Image {
+  image?: string;
+  link?: string;
+}
+
 export type SlickHeaderProps = {
-  images?: string[];
+  Images?: Image[];
   className?: string;
 };
 
@@ -20,7 +25,6 @@ export const SlickHeader = (SlickHeaderProps: SlickHeaderProps) => {
   useEffect(() => {
     setProps(SlickHeaderProps);
   }, [SlickHeaderProps]);
-
 
   //function to action
 
@@ -69,22 +73,26 @@ export const SlickHeader = (SlickHeaderProps: SlickHeaderProps) => {
         prevArrow={<CustomArrow direction="prev" />}
         nextArrow={<CustomArrow direction="next" />}
       >
-        {props.images &&
-          props.images.length > 0 &&
-          props.images.map((item: any, key: Key) => {
+        {props.Images &&
+          props.Images.length > 0 &&
+          props.Images.map((item: any, key: Key) => {
             return (
-              <div key={key} className={[styles.outImage].join(" ")}>
+              <a
+                key={key}
+                className={[styles.outImage].join(" ")}
+                href={item.link}
+              >
                 <img
                   className={[styles.Image].join(" ")}
-                  src={item}
+                  src={item.image}
                   alt="Not Found"
                 />
-              </div>
+              </a>
             );
           })}
       </Slider>
-      <div className={["container","row", styles.ButtonLink].join(" ")}>
-        <Navigation/>
+      <div className={["container", "row", styles.ButtonLink].join(" ")}>
+        <Navigation />
       </div>
     </div>
   );

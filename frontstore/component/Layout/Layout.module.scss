@@ -4,6 +4,9 @@
 
 .Layout {
   position: relative;
+  .children{
+    padding-top: 75px;
+  }
   .HeaderScroll {
     position: fixed;
     right: 0;
