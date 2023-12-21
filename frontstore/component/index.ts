@@ -3,8 +3,6 @@ import { Input } from "./Input";
 export type { InputProps } from "./Input";
 import { Breadcrumb } from "./Breadcrumb";
 export type { BreadcrumbProps } from "./Breadcrumb";
-import { SliderFilter } from "./SliderFilter";
-export type { SliderFilterProps } from "./SliderFilter";
 import { SlickHeader } from "./SlickHeader";
 export type { SlickHeaderProps } from "./SlickHeader";
 import { Card } from "./Card";
@@ -37,7 +35,6 @@ export {
   Selector,
   Input,
   Breadcrumb,
-  SliderFilter,
   Divider,
   Select,
   Pagination,

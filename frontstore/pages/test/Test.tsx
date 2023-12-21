@@ -37,7 +37,10 @@ const Test = () => {
         styles.DropDownHeader,
       ].join(" ")}
     >
-      <SlickHeader Images={Image} />
+      <SlickHeader className={[
+        "row align-center justify-center",
+        styles.Header,
+      ].join(" ")} Images={Image} />
     </div>
   );
 };

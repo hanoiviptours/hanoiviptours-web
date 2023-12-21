@@ -1,10 +1,9 @@
 @import "../../styles/mixins";
 @import "../../styles/variables";
 
-
 .SlickHeader {
+  position: absolute;
   width: 100%;
-  background-color: $background-component;
   .Slick {
     position: relative;
     width: 100%;
@@ -36,8 +35,9 @@
       z-index: 1;
     }
 
-    .next,.prev {
-      display: none;
+    .next,
+    .prev {
+      display: flex;
     }
 
     .outImage {
@@ -49,7 +49,7 @@
     }
     :global {
       .slick-dots {
-        bottom: 20px;
+        bottom: 55px;
       }
       .slick-dots li button:before {
         font-size: 15px;
@@ -59,86 +59,33 @@
         color: $white;
       }
     }
-    &:hover{
-      .next,.prev {
-        display: flex;
-      }
-    }
     @include responsive_large() {
       display: none;
     }
   }
   .ButtonLink {
-    width: 100%;
-    .Button {
-      cursor: pointer;
-      color: $white;
-      .outIcon {
-        padding-left: 25px;
-        padding-right: 10px;
-        @include responsive_medium() {
-          padding-left: 15px;
-          padding-right: 7px;
+    position: relative;
+    margin: auto;
+    box-shadow: 0 0 10px $gray;
+    border-radius: 6px;
+    top: -55px;
+    width: 70%;
+    background-color: $white;
+    padding: 5px;
+    .Navigation {
+      height: 100px;
+      .Drop{
+        padding: 10px 0;
+        border-radius: 6px;
+        cursor: pointer;
+        &:hover{
+          background-color: $anti-white;
         }
-        @include responsive_small() {
-          padding-left: 5px;
-          padding-right: 3px;
-          margin-top: -1px;
+        .icon{
+          height: 45px;
+          font-size: 25px;
         }
-        .icon {
-          font-size: 37px;
-          @include responsive_large() {
-            font-size: 28px;
-          }
-          @include responsive_medium() {
-            font-size: 20px;
-          }
-          @include responsive_small() {
-            font-size: 15px;
-          }
-        }
-        @include responsive_mobile_l() {
-          padding-left: 2px;
-          padding-right: 2px;
-        }
-      }
-      .content {
-        .Title {
-          font-weight: 600;
-          font-style: italic;
-          font-size: 16px;
-        }
-        .subTitle {
-          font-style: italic;
-          font-size: 16px;
-          padding-top: 3px;
-        }
-        @include responsive_large() {
-          .Title {
-            font-size: 12px;
-          }
-          .subTitle {
-            font-size: 12px;
-            padding-top: 2px;
-          }
-        }
-        @include responsive_medium() {
-          .Title {
-            font-size: 8px;
-          }
-          .subTitle {
-            font-size: 8px;
-            padding-top: 1px;
-          }
-        }
-        @include responsive_small() {
-          .Title {
-            font-size: 6px;
-          }
-          .subTitle {
-            font-size: 6px;
-            padding-top: 1px;
-          }
+        .Title{
         }
       }
     }

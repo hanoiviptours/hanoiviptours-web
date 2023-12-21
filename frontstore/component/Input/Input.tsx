@@ -20,7 +20,6 @@ export type InputProps = {
     | "password"
     | "number"
     | "textarea"
-    | "totalCard"
     | "file";
   shape?: "standard" | "default";
   disabled?: boolean;
@@ -42,8 +41,6 @@ const Input = (InputProps: InputProps) => {
       ? props.defaultValue
       : props.value
       ? props.value
-      : props.type == "totalCard"
-      ? 1
       : ""
   );
   //function to create
@@ -103,61 +100,12 @@ const Input = (InputProps: InputProps) => {
     );
   };
 
-  const renderTotalCard = () => {
-    return (
-      <div className={["row", styles.TotalCard].join(" ")}>
-        <Button
-          className={["col-4", styles.Minus].join(" ")}
-          children={<i className="bi bi-dash" />}
-          type="button"
-          onClick={() => {
-            if (parseInt(`${valueInput}`) > 1) {
-              setValueInput(parseInt(`${valueInput}`) - 1);
-              props.onChange && props.onChange(parseInt(`${valueInput}`) - 1);
-            }
-          }}
-        />
-        <div
-          className={[
-            "col-4 justify-center align-center",
-            styles.outInputTotal,
-          ].join(" ")}
-        >
-          <input
-            className={[
-              styles.inputTotal,
-              styles[`inputTotal_totalCard`],
-              props.classNameInput,
-            ].join(" ")}
-            type="number"
-            value={parseInt(`${valueInput}`)}
-            onChange={handleChange}
-            disabled={props.disabled}
-            max={100}
-            min={1}
-          />
-        </div>
-        <Button
-          className={["col-4", styles.Plus].join(" ")}
-          children={<i className="bi bi-plus" />}
-          type="button"
-          onClick={() => {
-            if (parseInt(`${valueInput}`) < 100) {
-              setValueInput(parseInt(`${valueInput}`) + 1);
-              props.onChange && props.onChange(parseInt(`${valueInput}`) + 1);
-            }
-          }}
-        />
-      </div>
-    );
-  };
+
 
   const renderInput = (type: any) => {
     switch (type) {
       case "textarea":
         return renderTextArea();
-      case "totalCard":
-        return renderTotalCard();
       default:
         return renderText(type);
     }
@@ -178,11 +126,11 @@ const Input = (InputProps: InputProps) => {
               border: "none",
               padding: "0px",
               boxShadow: "none",
-              width: props.type == "totalCard" ? "max-content" : "100%",
+              width: "100%",
               ...props.style,
             }
           : {
-              width: props.type == "totalCard" ? "max-content" : "100%",
+              width: "100%",
               ...props.style,
             }
       }

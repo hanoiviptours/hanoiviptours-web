@@ -1,15 +1,20 @@
 import React, { Key, useEffect, useState } from "react";
 import styles from "./Navigation.module.scss";
 
-
 export type NavigationProps = {
   className?: string;
+  type?: "normal" | "slick";
   style?: any;
 };
 const Navigation = (NavigationProps: NavigationProps) => {
   const [props, setProps] = useState(NavigationProps);
   const DropDownHeader = [
-    { icon: "bi bi-airplane-fill", title: "Vé máy bay", link: "#", color: "#0f8f03" },
+    {
+      icon: "bi bi-airplane-fill",
+      title: "Vé máy bay",
+      link: "#",
+      color: "#0f8f03",
+    },
     { icon: "bi bi-columns", title: "Khách sạn", link: "#", color: "#e60909" },
     {
       icon: "bi bi-house-heart",
@@ -23,8 +28,18 @@ const Navigation = (NavigationProps: NavigationProps) => {
       link: "#",
       color: "#e7eb09",
     },
-    { icon: "bi bi-train-front-fill", title: "Vé tàu", link: "#", color: "#cc063b" },
-    { icon: "bi bi-ticket-perforated", title: "Săn vé", link: "#", color: "#8a02b0" },
+    {
+      icon: "bi bi-train-front-fill",
+      title: "Vé tàu",
+      link: "#",
+      color: "#cc063b",
+    },
+    {
+      icon: "bi bi-ticket-perforated",
+      title: "Săn vé",
+      link: "#",
+      color: "#8a02b0",
+    },
     {
       icon: "bi bi-phone-flip",
       title: "Mua mã thẻ điện thoại",
@@ -54,7 +69,10 @@ const Navigation = (NavigationProps: NavigationProps) => {
     >
       {DropDownHeader &&
         DropDownHeader.length > 0 &&
-        DropDownHeader.map((item: any, key:Key) => {
+        (props.type == "slick"
+          ? DropDownHeader.slice(0, 6)
+          : DropDownHeader
+        ).map((item: any, key: Key) => {
           return (
             <div className={["col", styles.Drop].join(" ")} key={key}>
               <i

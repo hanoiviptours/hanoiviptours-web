@@ -26,7 +26,7 @@ const Layout = (LayoutProps: LayoutProps) => {
 
   const handleOpen = () => {
     setOpen(!open);
-    setOpenNavi(false)
+    setOpenNavi(false);
   };
 
   if (typeof window !== "undefined") {
@@ -61,9 +61,7 @@ const Layout = (LayoutProps: LayoutProps) => {
               {item.children && item.children == "KeyDown" ? (
                 <div>{item.title}</div>
               ) : (
-                item.link && (
-                  <a href={item.link}>{item.title}</a>
-                )
+                item.link && <a href={item.link}>{item.title}</a>
               )}
             </div>
           );
@@ -95,12 +93,12 @@ const Layout = (LayoutProps: LayoutProps) => {
       />
       {openNavi && (
         <Navigation
-          className={[styles.Navigation,openNavi&&styles.openNavi].join(" ")}
+          className={[styles.Navigation, openNavi && styles.openNavi].join(" ")}
         />
       )}
 
       <div className={[styles.children].join(" ")}>{props.children}</div>
-      <Footer />
+
       <SideDrawer
         className={[styles.SideDrawer].join(" ")}
         isOpen={open}
@@ -110,6 +108,7 @@ const Layout = (LayoutProps: LayoutProps) => {
       >
         {renderChildrenDrawer()}
       </SideDrawer>
+      <Footer />
     </div>
   );
 };
