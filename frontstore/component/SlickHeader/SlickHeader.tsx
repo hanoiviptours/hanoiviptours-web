@@ -319,6 +319,9 @@ export const SlickHeader = (SlickHeaderProps: SlickHeaderProps) => {
                 className={["col", styles.Drop].join(" ")}
                 key={key}
                 href={`${item.link}`}
+                onClick={() => {
+                  setKeyModalSlick("");
+                }}
               >
                 <i
                   className={[
