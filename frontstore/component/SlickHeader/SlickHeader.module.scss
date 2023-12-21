@@ -75,11 +75,12 @@
     .Navigation {
       height: 100px;
       .Drop{
+        border-bottom: 3px solid $white;
         padding: 10px 0;
-        border-radius: 6px;
         cursor: pointer;
-        &:hover{
-          background-color: $anti-white;
+        transition: 0.4s;
+        &:active{
+          background-color: $lighter-gray;
         }
         .icon{
           height: 45px;

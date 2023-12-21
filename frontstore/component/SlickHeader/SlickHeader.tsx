@@ -1,9 +1,11 @@
-import { Key, ReactNode, useEffect, useState, useRef } from "react";
+import { Key, ReactNode, useEffect, useState, useRef, Children } from "react";
 import React from "react";
 import styles from "./SlickHeader.module.scss";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import { Input } from "../Input";
+import { Button } from "../Button";
 
 interface Image {
   image?: string;
@@ -29,6 +31,32 @@ export const SlickHeader = (SlickHeaderProps: SlickHeaderProps) => {
       color: "#0f8f03",
       mode: "modal",
       key: "keyModal1",
+      children: [
+        {
+          component: "Input",
+          title: "Chọn điểm đi",
+          type: "text",
+          placeholder: "Chọn điểm đi",
+        },
+        {
+          component: "Input",
+          title: "Chọn điểm đến",
+          type: "text",
+          placeholder: "Chọn điểm đến",
+        },
+        {
+          component: "Input",
+          title: "Thời gian",
+          type: "date",
+          placeholder: "",
+        },
+        {
+          component: "Input",
+          title: "Số khách, hạng ghế",
+          type: "dropdownOption",
+          placeholder: "",
+        },
+      ],
     },
     {
       icon: "bi bi-columns",
@@ -37,6 +65,26 @@ export const SlickHeader = (SlickHeaderProps: SlickHeaderProps) => {
       color: "#e60909",
       mode: "modal",
       key: "keyModal2",
+      children: [
+        {
+          component: "Input",
+          title: "Chọn địa điểm",
+          type: "text",
+          placeholder: "Chọn địa điểm",
+        },
+        {
+          component: "Input",
+          title: "Thời gian lưu trú",
+          type: "date",
+          placeholder: "",
+        },
+        {
+          component: "Input",
+          title: "Số khách, số lượng phòng",
+          type: "dropdownOption",
+          placeholder: "",
+        },
+      ],
     },
     {
       icon: "bi bi-house-heart",
@@ -52,6 +100,26 @@ export const SlickHeader = (SlickHeaderProps: SlickHeaderProps) => {
       color: "#e7eb09",
       mode: "modal",
       key: "keyModal3",
+      children: [
+        {
+          component: "Input",
+          title: "Chọn thương hiệu",
+          type: "text",
+          placeholder: "Nhập thương hiệu",
+        },
+        {
+          component: "Input",
+          title: "Thời gian lưu trú",
+          type: "date",
+          placeholder: "",
+        },
+        {
+          component: "Input",
+          title: "Số khách, số lượng phòng",
+          type: "dropdownOption",
+          placeholder: "",
+        },
+      ],
     },
     {
       icon: "bi bi-train-front-fill",
@@ -60,6 +128,32 @@ export const SlickHeader = (SlickHeaderProps: SlickHeaderProps) => {
       color: "#cc063b",
       mode: "modal",
       key: "keyModal4",
+      children: [
+        {
+          component: "Input",
+          title: "Chọn điểm đi",
+          type: "text",
+          placeholder: "Chọn điểm đi",
+        },
+        {
+          component: "Input",
+          title: "Chọn điểm đến",
+          type: "text",
+          placeholder: "Chọn điểm đến",
+        },
+        {
+          component: "Input",
+          title: "Thời gian",
+          type: "date",
+          placeholder: "",
+        },
+        {
+          component: "Input",
+          title: "Số lượng khách và loại ghế",
+          type: "dropdownOption",
+          placeholder: "",
+        },
+      ],
     },
     {
       icon: "bi bi-ticket-perforated",
@@ -68,6 +162,26 @@ export const SlickHeader = (SlickHeaderProps: SlickHeaderProps) => {
       color: "#8a02b0",
       mode: "modal",
       key: "keyModal5",
+      children: [
+        {
+          component: "Input",
+          title: "Chọn điểm đi",
+          type: "text",
+          placeholder: "Chọn điểm đi",
+        },
+        {
+          component: "Input",
+          title: "Chọn điểm đến",
+          type: "text",
+          placeholder: "Chọn điểm đến",
+        },
+        {
+          component: "Input",
+          title: "Số khách",
+          type: "dropdownOption",
+          placeholder: "",
+        },
+      ],
     },
   ];
 
@@ -116,20 +230,44 @@ export const SlickHeader = (SlickHeaderProps: SlickHeaderProps) => {
     return <div className={[styles.arrow].join(" ")}>{arrowIcon}</div>;
   };
 
-  const renderModalSlick = (KeyModal:string) => {
+  const renderChildrenNavi = (Children: any) => {
+    return (
+      <>
+        {Children &&
+          Children.length > 0 &&
+          Children.map((item: any, key: Key) => {
+            return (
+              <div className={["col", styles.InputNavi].join(" ")} key={key}>
+                <div className={["row", styles.TitleInput].join(" ")}>
+                  {item.title}
+                </div>
+                <div className={["row", styles.Input].join(" ")}>
+                  <Input placeholder={item.placeholder} type="text" />
+                </div>
+              </div>
+            );
+          })}
+        <div className={[styles.buttonSreachNavi].join(" ")}>
+          <Button />
+        </div>
+      </>
+    );
+  };
+
+  const renderModalSlick = (KeyModal: string) => {
     switch (KeyModal) {
       case "keyModal1":
-        return(<>1</>);
+        return renderChildrenNavi(DropDownHeader[0].children);
       case "keyModal2":
-        return(<>2</>);
+        return renderChildrenNavi(DropDownHeader[1].children);
       case "keyModal3":
-        return(<>3</>);
+        return renderChildrenNavi(DropDownHeader[3].children);
       case "keyModal4":
-        return(<>4</>);
+        return renderChildrenNavi(DropDownHeader[4].children);
       case "keyModal5":
-        return(<>5</>);
+        return renderChildrenNavi(DropDownHeader[5].children);
     }
-  }
+  };
 
   const renderNavigationSlick = () => {
     return (
@@ -147,8 +285,17 @@ export const SlickHeader = (SlickHeaderProps: SlickHeaderProps) => {
                 key={key}
                 onClick={() => {
                   handleOpenModalSlick();
-                  setKeyModalSlick(item.key);
+                  if (item.key == keyModalSlick) {
+                    setKeyModalSlick("");
+                  } else {
+                    setKeyModalSlick(item.key);
+                  }
                 }}
+                style={
+                  item.key == keyModalSlick
+                    ? { borderBottom: "3px solid green" }
+                    : {}
+                }
               >
                 <i
                   className={[
@@ -227,6 +374,14 @@ export const SlickHeader = (SlickHeaderProps: SlickHeaderProps) => {
       </Slider>
       <div className={["container", styles.ButtonLink].join(" ")}>
         {renderNavigationSlick()}
+        <div
+          className={[
+            "row align-center justify-center",
+            styles.modalSlick,
+          ].join(" ")}
+        >
+          {keyModalSlick != "" && renderModalSlick(keyModalSlick)}
+        </div>
       </div>
     </div>
   );
