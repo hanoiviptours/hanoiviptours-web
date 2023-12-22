@@ -241,14 +241,25 @@ export const SlickHeader = (SlickHeaderProps: SlickHeaderProps) => {
                 <div className={["row", styles.TitleInput].join(" ")}>
                   {item.title}
                 </div>
-                <div className={["row", styles.Input].join(" ")}>
-                  <Input placeholder={item.placeholder} type="text" />
+                <div className={["row", styles.outInput].join(" ")}>
+                  <Input
+                    className={[styles.Input].join(" ")}
+                    placeholder={item.placeholder}
+                    type="text"
+                  />
                 </div>
               </div>
             );
           })}
         <div className={[styles.buttonSreachNavi].join(" ")}>
-          <Button />
+          <Button
+            className={[styles.button].join(" ")}
+            children={
+              <i className={["bi bi-search", styles.iconButton].join(" ")} />
+            }
+            color="fill"
+            borderRadius={"standard"}
+          />
         </div>
       </>
     );
@@ -386,6 +397,16 @@ export const SlickHeader = (SlickHeaderProps: SlickHeaderProps) => {
           {keyModalSlick != "" && renderModalSlick(keyModalSlick)}
         </div>
       </div>
+      <div
+        className={[
+          styles.SidebarOverlay,
+          `${keyModalSlick != "" ? styles.Active : ""}`,
+        ].join(" ")}
+        onClick={() => {
+          setKeyModalSlick("");
+          handleOpenModalSlick();
+        }}
+      ></div>
     </div>
   );
 };
