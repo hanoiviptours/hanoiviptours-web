@@ -95,7 +95,7 @@ const Layout = (LayoutProps: LayoutProps) => {
       {openNavi && (
         <Navigation
           className={[styles.Navigation, openNavi && styles.openNavi].join(" ")}
-          clickOutside={()=>{setOpenNavi(false)}}
+          // clickOutside={()=>{setOpenNavi(false)}}
         />
       )}
 
