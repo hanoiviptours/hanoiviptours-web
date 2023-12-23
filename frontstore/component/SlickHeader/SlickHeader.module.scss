@@ -42,9 +42,10 @@
 
     .outImage {
       width: 100%;
-      max-height: 600px;
+      height: 500px;
       .Image {
         width: inherit;
+        height: fill;
         object-fit: fill;
       }
     }
