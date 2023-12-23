@@ -385,6 +385,8 @@ export const SlickHeader = (SlickHeaderProps: SlickHeaderProps) => {
         slidesToShow={1}
         className={[styles.Slick, props.className].join(" ")}
         swipeToSlide={true}
+        autoplay={true}
+        autoplaySpeed={3000}
         dots={true}
         prevArrow={<CustomArrow direction="prev" />}
         nextArrow={<CustomArrow direction="next" />}
