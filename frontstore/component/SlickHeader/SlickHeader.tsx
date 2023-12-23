@@ -6,6 +6,7 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { Input } from "../Input";
 import { Button } from "../Button";
+import { Icon } from "../Icon";
 
 interface Image {
   image?: string;
@@ -23,9 +24,11 @@ export const SlickHeader = (SlickHeaderProps: SlickHeaderProps) => {
   const slider = useRef<any>();
   const [openModalSlick, setOpenModalSlick] = useState(false);
   const [keyModalSlick, setKeyModalSlick] = useState("");
+  const ref = useRef<any>(null);
+
   const DropDownHeader = [
     {
-      icon: "bi bi-airplane-fill",
+      icon: "faPlaneUp",
       title: "Vé máy bay",
       link: "#",
       color: "#0f8f03",
@@ -59,7 +62,7 @@ export const SlickHeader = (SlickHeaderProps: SlickHeaderProps) => {
       ],
     },
     {
-      icon: "bi bi-columns",
+      icon: "faHotel",
       title: "Khách sạn",
       link: "#",
       color: "#e60909",
@@ -87,14 +90,14 @@ export const SlickHeader = (SlickHeaderProps: SlickHeaderProps) => {
       ],
     },
     {
-      icon: "bi bi-house-heart",
+      icon: "faBuilding",
       title: "Khách sạn commit",
       link: "#",
       color: "#16f251",
       mode: "link",
     },
     {
-      icon: "bi bi-8-square-fill",
+      icon: "faStar",
       title: "Top thương hiệu",
       link: "#",
       color: "#e7eb09",
@@ -122,7 +125,7 @@ export const SlickHeader = (SlickHeaderProps: SlickHeaderProps) => {
       ],
     },
     {
-      icon: "bi bi-train-front-fill",
+      icon: "faTrain",
       title: "Vé tàu",
       link: "#",
       color: "#cc063b",
@@ -156,7 +159,7 @@ export const SlickHeader = (SlickHeaderProps: SlickHeaderProps) => {
       ],
     },
     {
-      icon: "bi bi-ticket-perforated",
+      icon: "faTicket",
       title: "Săn vé",
       link: "#",
       color: "#8a02b0",
@@ -189,6 +192,24 @@ export const SlickHeader = (SlickHeaderProps: SlickHeaderProps) => {
   useEffect(() => {
     setProps(SlickHeaderProps);
   }, [SlickHeaderProps]);
+
+  useEffect(() => {
+    /**
+     * Alert if clicked on outside of element
+     */
+    function handleClickOutside(event: any) {
+      if (ref.current && !ref.current.contains(event.target)) {
+        setKeyModalSlick("");
+        setOpenModalSlick(false);
+      }
+    }
+    // Bind the event listener
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      // Unbind the event listener on clean up
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [ref]);
 
   //function to action
 
@@ -308,12 +329,12 @@ export const SlickHeader = (SlickHeaderProps: SlickHeaderProps) => {
                     : {}
                 }
               >
-                <i
+                <Icon
                   className={[
                     "row align-center justify-center",
-                    item.icon,
                     styles.icon,
                   ].join(" ")}
+                  icon={item.icon}
                   style={{ color: `${item.color}` }}
                 />
                 <div
@@ -334,12 +355,12 @@ export const SlickHeader = (SlickHeaderProps: SlickHeaderProps) => {
                   setKeyModalSlick("");
                 }}
               >
-                <i
+                <Icon
                   className={[
                     "row align-center justify-center",
-                    item.icon,
                     styles.icon,
                   ].join(" ")}
+                  icon={item.icon}
                   style={{ color: `${item.color}` }}
                 />
                 <div
@@ -386,7 +407,7 @@ export const SlickHeader = (SlickHeaderProps: SlickHeaderProps) => {
             );
           })}
       </Slider>
-      <div className={["container", styles.ButtonLink].join(" ")}>
+      <div ref={ref} className={["container", styles.ButtonLink].join(" ")}>
         {renderNavigationSlick()}
         <div
           className={[

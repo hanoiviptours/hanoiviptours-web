@@ -1,4 +1,4 @@
-import { ReactNode, useEffect, useState, Key } from "react";
+import { ReactNode, useEffect, useState, Key, useRef } from "react";
 import Header from "./Header";
 import Footer from "./Footer";
 import { useRouter } from "next/router";
@@ -19,6 +19,7 @@ const Layout = (LayoutProps: LayoutProps) => {
   const [valueScroll, setValueScroll] = useState(0);
 
   //function to action
+
   const printScrollY = () => {
     const currentScrollY = window.scrollY;
     setValueScroll(currentScrollY);
@@ -87,13 +88,14 @@ const Layout = (LayoutProps: LayoutProps) => {
                 zIndex: "1",
               }
             : {
-                zIndex: "2",
+                zIndex: "4",
               }
         }
       />
       {openNavi && (
         <Navigation
           className={[styles.Navigation, openNavi && styles.openNavi].join(" ")}
+          clickOutside={()=>{setOpenNavi(false)}}
         />
       )}
 

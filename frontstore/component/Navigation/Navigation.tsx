@@ -1,53 +1,57 @@
-import React, { Key, useEffect, useState } from "react";
+import React, { Key, useEffect, useRef, useState } from "react";
 import styles from "./Navigation.module.scss";
+import { Icon } from "../Icon";
 
 export type NavigationProps = {
   className?: string;
   type?: "normal" | "slick";
   style?: any;
+  clickOutside?: () => void;
 };
+
 const Navigation = (NavigationProps: NavigationProps) => {
   const [props, setProps] = useState(NavigationProps);
+  const ref = useRef<any>(null);
   const DropDownHeader = [
     {
-      icon: "bi bi-airplane-fill",
+      icon: "faPlaneUp",
       title: "Vé máy bay",
       link: "#",
       color: "#0f8f03",
     },
-    { icon: "bi bi-columns", title: "Khách sạn", link: "#", color: "#e60909" },
+    { icon: "faHotel", title: "Khách sạn", link: "#", color: "#e60909" },
     {
-      icon: "bi bi-house-heart",
+      icon: "faBuilding",
       title: "Khách sạn commit",
       link: "#",
       color: "#16f251",
     },
     {
-      icon: "bi bi-8-square-fill",
+      icon: "faStar",
       title: "Top thương hiệu",
       link: "#",
       color: "#e7eb09",
     },
     {
-      icon: "bi bi-train-front-fill",
+      icon: "faTrain",
       title: "Vé tàu",
       link: "#",
       color: "#cc063b",
     },
     {
-      icon: "bi bi-ticket-perforated",
+      icon: "faTicket",
       title: "Săn vé",
       link: "#",
       color: "#8a02b0",
     },
     {
-      icon: "bi bi-phone-flip",
+      icon: "faMobile",
       title: "Mua mã thẻ điện thoại",
       link: "#",
       color: "#07d9f5",
     },
     {
-      icon: "bi bi-phone-vibrate-fill",
+      icon: "faPhone",
       title: "Nạp tiền điện thoại",
       link: "#",
       color: "#0063ed",
@@ -58,6 +62,23 @@ const Navigation = (NavigationProps: NavigationProps) => {
     setProps(NavigationProps);
   }, [NavigationProps]);
 
+  useEffect(() => {
+    /**
+     * Alert if clicked on outside of element
+     */
+    function handleClickOutside(event: any) {
+      if (ref.current && !ref.current.contains(event.target)) {
+        props.clickOutside&&props.clickOutside()
+      }
+    }
+    // Bind the event listener
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      // Unbind the event listener on clean up
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [ref]);
+
   return (
     <div
       className={[
@@ -66,6 +87,7 @@ const Navigation = (NavigationProps: NavigationProps) => {
         props.className,
       ].join(" ")}
       style={props.style}
+      ref={ref}
     >
       {DropDownHeader &&
         DropDownHeader.length > 0 &&
@@ -75,12 +97,12 @@ const Navigation = (NavigationProps: NavigationProps) => {
         ).map((item: any, key: Key) => {
           return (
             <div className={["col", styles.Drop].join(" ")} key={key}>
-              <i
+              <Icon
                 className={[
                   "row align-center justify-center",
-                  item.icon,
                   styles.icon,
                 ].join(" ")}
+                icon={item.icon}
                 style={{ color: `${item.color}` }}
               />
               <div

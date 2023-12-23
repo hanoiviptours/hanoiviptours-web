@@ -1,4 +1,4 @@
-import { useState, useEffect, Key } from "react";
+import { useState, useEffect, Key, useRef } from "react";
 import styles from "./Header.module.scss";
 import Image from "next/image";
 import { Logo } from "../../../public/images";

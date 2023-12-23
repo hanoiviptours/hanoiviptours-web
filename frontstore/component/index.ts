@@ -25,6 +25,8 @@ import { SideDrawer } from "./SideDrawer";
 export type { SideDrawerProps } from "./SideDrawer";
 import { Dropdown } from "./Dropdown";
 export type { DropdownProps } from "./Dropdown";
+import { Icon } from "./Icon";
+export type { IconProps } from "./Icon";
 
 export {
   Layout,
@@ -40,5 +42,6 @@ export {
   Pagination,
   Filter,
   SideDrawer,
-  Dropdown
+  Dropdown,
+  Icon
 };
