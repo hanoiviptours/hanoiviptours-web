@@ -5,18 +5,15 @@ import { Button } from "..";
 
 export type CardProps = {
   image?: string;
-  tagSale?: string;
   title?: string;
-  content?: string;
   vote?: number;
+  valueVote?: number;
   soldOut?: boolean;
   price?: any;
-  discountPrice?: any;
   link?: string;
   onClick?: () => void;
   className?: string;
-  buttonEnd?: boolean;
-  type?: "Product" | "Image" | "Docs" | "News";
+  type?: "Product" | "City";
 };
 
 export const Card = (CardProps: CardProps) => {
@@ -33,50 +30,25 @@ export const Card = (CardProps: CardProps) => {
   const handleOnClick = () => {
     props.onClick && props.onClick();
   };
+
+  const subVote = (point: number) => {
+    if (point >= 4.5 && point < 5) {
+      return "Xuất sắc";
+    } else if (point < 4.5 && point >= 4.0) {
+      return "Rất tốt";
+    } else if (point < 4.0 && point >= 3.5) {
+      return "Tốt";
+    } else if (point < 3.5 && point >= 3.0) {
+      return "Bình thường";
+    } else if (point < 3.0 && point > 0) {
+      return "Tệ";
+    } else if (point == 0) {
+      return "Chưa có đánh giá";
+    }
+  };
   //Function to render
-  const renderImage = () => {
-    return (
-      <>
-        <div
-          className={["row justify-center align-center", styles.outImage].join(
-            " "
-          )}
-        >
-          <img className={styles.img} src={props.image} alt="Not Found" />
-        </div>
-        {props.type == "News" && (
-          <div
-            className={[
-              "justify-center align-center",
-              styles.backgroundImg,
-            ].join(" ")}
-          />
-        )}
-      </>
-    );
-  };
 
-  const renderTagSale = () => {
-    return (
-      <div
-        className={["justify-center align-center", styles.tagSale].join(" ")}
-      >
-        <div className={[styles.inTagSale].join(" ")}>{props.tagSale}</div>
-      </div>
-    );
-  };
-
-  const renderSoldOut = () => {
-    return (
-      <div
-        className={["row justify-center align-center", styles.soldOut].join(
-          " "
-        )}
-      >
-        HẾT HÀNG
-      </div>
-    );
-  };
+  //Card City
   const renderVote = (rate: number) => {
     const voteLever = () => {
       const array: number[] = [];
@@ -136,88 +108,89 @@ export const Card = (CardProps: CardProps) => {
       <>
         {typeof window !== "undefined" && (
           <div
-            className={["row justify-center align-center", styles.price].join(
-              " "
-            )}
+            className={["row justify-end align-end", styles.price].join(" ")}
           >
-            {props.discountPrice && (
-              <span className={[styles.defaultPrice].join(" ")}>
-                {props.price.toLocaleString()}₫
-              </span>
-            )}
-            <span className={[styles.discountPrice].join(" ")}>
-              {props.discountPrice
-                ? props.discountPrice.toLocaleString()
-                : props.price?.toLocaleString()}
-              ₫
-            </span>
+            {props.price.toLocaleString()} đ
           </div>
         )}
       </>
     );
   };
 
+  const renderImage = () => {
+    return (
+      <div
+        className={[
+          "justify-center align-center",
+          props.type == "City" ? styles.outImageCity : styles.outImageProduct,
+        ].join(" ")}
+      >
+        <img className={styles.img} src={props.image} alt="Not Found" />
+      </div>
+    );
+  };
+  const renderBottom = () => {
+    return (
+      <div
+        className={[
+          props.type == "City"
+            ? "row justify-start align-center"
+            : "row-none-warp",
+          props.type == "City" ? styles.bottomCity : styles.bottomProduct,
+        ].join(" ")}
+      >
+        {props.type == "City" ? (
+          <div className={[styles.title].join(" ")}>{props.title}</div>
+        ) : (
+          <div className={[styles.content].join(" ")}>
+            <div className={[styles.Title].join(" ")}>{props.title}</div>
+            <div
+              className={["row justify-start align-center", styles.Vote].join(
+                " "
+              )}
+            >
+              {renderVote(props.vote ? props.vote : 0)}
+            </div>
+            <div
+              className={[
+                "row justify-start align-center",
+                styles.SubVote,
+              ].join(" ")}
+            >
+              <div className={[styles.Point].join(" ")}>{props.vote}</div>
+              <div className={[styles.Sub].join(" ")}>
+                {subVote(props.vote ? props.vote : 0)}
+              </div>
+              {props.valueVote && (
+                <div className={[styles.valueVote].join(" ")}>
+                  | {props.valueVote} đánh giá
+                </div>
+              )}
+            </div>
+            {renderPrice()}
+          </div>
+        )}
+      </div>
+    );
+  };
+
   //Main render
   return (
     <div className={[styles.outCard].join(" ")}>
-      {props.tagSale && typeCss == "Product" && renderTagSale()}
       <a
         href={props.link}
         onClick={() => {
           handleOnClick();
         }}
       >
-        <div
-          className={[
-            props.type ? styles[props.type] : styles.Product,
-            props.className,
-          ].join(" ")}
-        >
-          <div className={[styles.FameImage].join(" ")}>
-            {renderImage()}
-            {props.soldOut && renderSoldOut()}
-          </div>
-          <div
-            className={["justify-center align-center", styles.FameContent].join(
-              " "
-            )}
-          >
-            <div className={[styles.nameCard].join(" ")}>{props.title}</div>
-            {props.type == "Docs" && (
-              <div className={[, styles.outLineDocs].join(" ")}>
-                <hr className={[styles.lineDocs].join(" ")} />
-              </div>
-            )}
-            {props.content && (
-              <div className={[, styles.Content].join(" ")}>
-                {props.content}
-              </div>
-            )}
-            <div
-              className={[
-                "row justify-center align-center",
-                styles.voteCard,
-              ].join(" ")}
-            >
-              {props.vote && renderVote(props.vote)}
-            </div>
-            {renderPrice()}
-          </div>
-          {props.type == "Docs" && props.buttonEnd && (
-            <div className={["row", styles.ButtonMoreCard].join(" ")}>
-              <Button
-                className={[styles.inButtonMoreCard].join(" ")}
-                children={"ĐỌC THÊM"}
-                color={"fill"}
-                borderRadius={"none"}
-              />
-            </div>
-          )}
+        <div className={[styles.Card, props.className].join(" ")}>
+          {renderImage()}
+          {renderBottom()}
         </div>
       </a>
     </div>
   );
 };
 Card.deafultProps = {
-  buttonEnd:false
+  buttonEnd: false,
 };
