@@ -1,0 +1,37 @@
+@import "../../styles/mixins";
+@import "../../styles/variables";
+
+.Authen {
+  .hintLogin {
+    font-size: 17px;
+    padding: 10px 0;
+    font-weight: 600;
+  }
+
+  .outButtonLogin {
+    padding: 12px 0;
+    .buttonLogin {
+      border-radius: 6px;
+      .childrenButton {
+        font-size: 17px;
+        font-weight: 600;
+        padding: 10px 15px;
+      }
+    }
+  }
+
+  .hintRegister {
+    font-size: 16px;
+    padding: 10px 0;
+    .hintRegister1 {
+      padding-right: 3px;
+    }
+    .hintRegister2 {
+      cursor: pointer;
+      color: $text;
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+}

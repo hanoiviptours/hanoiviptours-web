@@ -1,0 +1,14 @@
+@import "../../../styles/mixins";
+@import "../../../styles/variables";
+
+
+.Footer {
+  background-color: $gray;
+  color: $white;
+  .Text1{
+    padding:8px;
+  }
+  .Text2{
+    padding-bottom:8px;
+  }
+}

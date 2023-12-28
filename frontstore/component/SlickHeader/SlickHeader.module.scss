@@ -1,0 +1,142 @@
+@import "../../styles/mixins";
+@import "../../styles/variables";
+
+.SlickHeader {
+  position: absolute;
+  width: 100%;
+  .Slick {
+    position: relative;
+    width: 100%;
+    .arrow .next {
+      position: absolute;
+      top: 50%;
+      width: 40px;
+      height: 40px;
+      color: $white;
+      align-items: center;
+      justify-content: center;
+      right: 10px;
+      font-size: 40px;
+      cursor: pointer;
+      z-index: 1;
+    }
+
+    .arrow .prev {
+      position: absolute;
+      top: 50%;
+      width: 40px;
+      height: 40px;
+      color: $white;
+      align-items: center;
+      justify-content: center;
+      left: 10px;
+      font-size: 40px;
+      cursor: pointer;
+      z-index: 1;
+    }
+
+    .next,
+    .prev {
+      display: flex;
+    }
+
+    .outImage {
+      width: 100%;
+      height: 500px;
+      .Image {
+        width: inherit;
+        height: fill;
+        object-fit: fill;
+      }
+    }
+    :global {
+      .slick-dots {
+        bottom: 70px;
+      }
+      .slick-dots li button:before {
+        font-size: 15px;
+        color: $white;
+      }
+      .slick-dots li.slick-active button:before {
+        color: $white;
+      }
+    }
+    @include responsive_large() {
+      display: none;
+    }
+  }
+  .ButtonLink {
+    position: relative;
+    transition: 0.4s;
+    z-index: 3;
+    margin: auto;
+    box-shadow: 0 0 10px $gray;
+    border-radius: 6px;
+    top: -65px;
+    width: 80%;
+    background-color: $white;
+    padding: 5px;
+    .Navigation {
+      height: 100px;
+      .Drop{
+        border-bottom: 3px solid $white;
+        padding: 10px 0;
+        cursor: pointer;
+        transition: 0.4s;
+        &:active{
+          background-color: $lighter-gray;
+        }
+        .icon{
+          height: 45px;
+          font-size: 25px;
+        }
+        .Title{
+        }
+      }
+    }
+    .modalSlick{
+      padding: 10px;
+      .InputNavi{
+        padding: 10px;
+        .TitleInput{
+          padding-bottom: 10px;
+        }
+        .outInput{
+          .Input{
+            height: 38px;
+            border-radius: 3px;
+            border: 1px solid $gray;
+          }
+        }
+      }
+      .buttonSreachNavi{
+        padding: 10px;
+        padding-top: 35px;
+        .button{
+          height: 39px;
+          width: 70px;
+          border-radius: 3px;
+          .iconButton{
+            font-size: 23px;
+          }
+        }
+      }
+    }
+  }
+  .SidebarOverlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.4);
+    transition: 0.5s;
+    opacity: 0;
+    visibility: hidden;
+    z-index: 2;
+  }
+  .Active {
+    opacity: 1;
+    visibility: visible;
+  }
+}

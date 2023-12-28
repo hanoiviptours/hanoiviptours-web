@@ -1,0 +1,18 @@
+.Select {
+
+  cursor: pointer;
+  outline: none;
+  background: none;
+  .Option {
+    cursor: pointer;
+  }
+}
+
+.Shape {
+  &_standard {
+    border-radius: 6px;
+  }
+  &_round {
+    border-radius: 30px;
+  }
+}

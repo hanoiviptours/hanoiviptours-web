@@ -1,0 +1,51 @@
+@import "../../styles/mixins";
+@import "../../styles/variables";
+
+
+.PaginationButton {
+  .Button {
+    border-radius: 30px;
+    border: 0.5px solid $gray;
+    margin: 0 5px;
+    cursor: pointer;
+    background-color: $white;
+    height: 35px;
+    width:35px;
+   &:hover {
+      color: $white;
+      background-color: $textOrange;
+      transition: 0.3s;
+      border: 0.5px solid $textOrange;
+    }
+
+    &[disabled] {
+      cursor: not-allowed;
+      opacity: 0.6;
+      background-color: $white;
+      /* Reset background color */
+      color: $black;
+      border: 0.5px solid $gray;
+    }
+  }
+
+  .ButtonArrow {
+    border-radius: 30px;
+    border: 0.5px solid $gray;
+    margin: 0 2px;
+    cursor: pointer;
+    background-color: $white;
+
+  }
+
+  .Dot {
+    font-size: 20px;
+    margin: 0 7px;
+    color: $gray;
+  }
+
+  .ActiveButton {
+    color: $white;
+    background-color: $textOrange;
+    border: 0.5px solid $textOrange;
+  }
+}

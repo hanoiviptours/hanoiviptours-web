@@ -1,0 +1,126 @@
+@import "../../../styles/mixins";
+@import "../../../styles/variables";
+
+
+.Header {
+  background-color: $white;
+  box-shadow: 0 0 5px $black;
+  margin-bottom: 1px;
+  &_large {
+    height: 50px;
+    padding: 15px 0;
+    font-size: 14px;
+    .LargeBody {
+      height: 100%;
+      .WarpDraw {
+        display: flex;
+        .iconDraw {
+          font-size: 35px;
+          color: $black;
+          font-weight: 700;
+          cursor: pointer;
+          &:hover {
+            color: $color-main;
+          }
+        }
+      }
+      .WarpImage {
+        height: 100%;
+        padding-bottom: 10px;
+        display: flex;
+        justify-content: center;
+        img {
+          height: 60px;
+          width: auto;
+        }
+      }
+      .Navigation {
+        @include responsive_large() {
+          display: none;
+        }
+        margin: 0 -20px;
+        padding-left: 20px;
+        .WarpLink {
+          position: relative;
+          padding: 0 15px;
+          @include responsive_extra_large() {
+            padding: 0 10px;
+          }
+          .Parent {
+            font-size: 18px;
+            transition: 0.3s;
+            cursor: pointer;
+            .IconDown {
+              padding-left: 5px;
+            }
+          }
+          .Children {
+            &:before {
+              content: "";
+              position: absolute;
+              bottom: 100%;
+              left: 30%;
+              border-bottom: 10px solid $white;
+              border-left: 10px solid transparent;
+              border-right: 10px solid transparent;
+              z-index: 2;
+            }
+            visibility: hidden;
+            position: absolute;
+            opacity: 0;
+            transition: 0.4s;
+            top: calc(100% + 45px);
+            left: 0;
+            background-color: $white;
+            filter: drop-shadow(0px 3px 6px rgba($black, 30%));
+            padding: 20px;
+            min-width: 200px;
+            width: max-content;
+            z-index: 2;
+            .LinkChildren {
+              cursor: pointer;
+              padding: 10px 15px;
+              border-radius: 12px;
+              transition: 0.3s background-color;
+              &:hover {
+                background-color: $background-component;
+              }
+            }
+            &:hover {
+              visibility: visible;
+              opacity: 1;
+            }
+          }
+          &:hover {
+            .Parent {
+              color: $background-component;
+            }
+            .Children {
+              visibility: visible;
+              opacity: 1;
+              top: calc(100% + 15px);
+            }
+          }
+        }
+      }
+      .SignIn{
+        .inSignIn{
+          .linkSignUp{
+            padding: 0px 15px;
+            color: $green;
+            cursor: pointer;
+            &:hover{
+              text-decoration: underline;
+            }
+          }
+          .buttonSignIn{
+            border-radius: 21px;
+            width: 150px;
+            height: 40px;
+            font-size: 15px;
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,110 @@
+@import "../../styles/mixins";
+@import "../../styles/variables";
+
+.outCard {
+  padding: 10px;
+  .Card {
+    position: relative;
+    border-radius: 6px;
+    overflow: hidden;
+    box-shadow: 0 0 5px $gray;
+    cursor: pointer;
+    .outImageProduct {
+      height: inherit;
+      width: inherit;
+      transition-duration: 0.5s;
+      transform: scale(1.1);
+      .img {
+        height: 60%;
+        width: inherit;
+        object-fit: fill;
+      }
+    }
+    .bottomProduct {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 40%;
+      width: inherit;
+      background-color: $white;
+      .content {
+        width: inherit;
+        height: 100%;
+        position: relative;
+        .Title {
+          font-size: 20px;
+          font-weight: 600;
+          color: $blue;
+          padding: 15px;
+          max-height: 1rem;
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+        }
+        .Vote {
+          padding: 0 15px;
+          font-size: 23px;
+        }
+        .SubVote {
+          font-size: 18px;
+          padding: 15px;
+          .Point {
+            font-weight: 600;
+            border-radius: 3px;
+            padding: 3px;
+            color: $white;
+            background-color: $blue;
+          }
+          .Sub {
+            padding: 0 3px;
+            font-weight: 600;
+            color: $blue;
+          }
+          .valueVote {
+            color: $gray;
+            font-size: 16px;
+          }
+        }
+        .price {
+          position: absolute;
+          bottom: 15px;
+          right: 15px;
+          font-size: 27px;
+          font-weight: 600;
+          color: $textOrange;
+        }
+      }
+    }
+    .outImageCity {
+      height: inherit;
+      width: inherit;
+      transition-duration: 0.5s;
+      transform: scale(1.1);
+      .img {
+        height: inherit;
+        width: inherit;
+        object-fit: fill;
+      }
+    }
+    .bottomCity {
+      position: absolute;
+      color: $white;
+      height: 18%;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background-color: rgba(0, 0, 0, 0.4);
+      .title {
+        font-size: 30px;
+        padding: 0 20px;
+      }
+    }
+    &:hover {
+      box-shadow: 0 0 10px $gray;
+      .outImageCity {
+        transform: scale(1);
+      }
+    }
+  }
+}
