@@ -1,0 +1,121 @@
+@import "../../styles/mixins";
+@import "../../styles/variables";
+
+.outComponent {
+  width: 100%;
+  border-radius: 6px;
+  .Title {
+    width: 100%;
+    .outInput {
+      width: inherit;
+      padding: 10px;
+      .outTitleInput {
+        padding-bottom: 10px;
+        .TitleInput{
+
+        }
+        .Check{
+          .CheckBox{
+            cursor: pointer;
+            accent-color: $cyan;
+          }
+        }
+      }
+      .icon{
+        padding-left: 15px;
+      }
+      .InputNavi {
+        min-height: 35px;
+        background-color: $white;
+        border-radius: 3px;
+        border: 1px solid;
+        box-shadow: 0 0 1px $gray;
+        overflow: hidden;
+        &:focus-within {
+          box-shadow: 0 0 8px $inputFocus;
+          /* Larger box-shadow on focus-within */
+        }
+
+        .Text {
+          padding: 0px 8px;
+          height: 100%;
+          width: 100%;
+          border: none;
+          outline: none;
+          flex: 1;
+          font-size: 1rem;
+          margin-left: 5px;
+
+          &_number::-webkit-outer-spin-button,
+          &_number::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+          }
+        }
+      }
+    }
+  }
+  .Children {
+    width: 98%;
+    background-color: $white;
+    .option {
+      .name {
+        font-size: 18px;
+        font-weight: 600;
+        padding: 10px 0;
+      }
+      .select {
+        cursor: pointer;
+        padding: 5px 0;
+        border-radius: 6px;
+        &:hover {
+          background-color: $option;
+        }
+        .radio{
+          margin-top: -2px;
+          accent-color: $cyan;
+        }
+      }
+      .selectValue{
+        padding: 5px;
+        border-bottom: 1px solid $gray;
+        .selectName{
+          .titleSelect{
+            font-size: 17px;
+          }
+          .subTitleSelect{
+            padding-top: 3px;
+            font-size: 14px;
+            color: $gray;
+          }
+        }
+        .value{
+          .icon{
+            color: $cyan;
+            padding: 0 13px;
+          }
+        }
+      }
+    }
+    .outDate{
+      display: inline-block;
+      .button{
+        position: relative;
+        margin-top: -20px;
+        .submit{
+          position: absolute;
+          background-color: $cyan;
+          border-radius: 6px;
+          width: 80px;
+          right: 85px;
+        }
+        .clear{
+          position: absolute;
+          border-radius: 6px;
+          width: 60px;
+          right: 15px;
+        }
+      }
+    }
+  }
+}
