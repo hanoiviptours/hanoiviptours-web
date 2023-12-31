@@ -94,7 +94,6 @@ const InputNavi = (InputNaviProps: InputNaviProps) => {
       : ""
   );
 
-  //test
   const [Unit, setUnit] = useState<any>({
     passenger: [
       { title: "Người lớn", quantity: 1 },
