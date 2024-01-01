@@ -32,6 +32,8 @@ export type InputNaviProps = {
   classNameInput?: string;
   iconClassName?: string;
   TextClassName?: string;
+  classNameTitle?: string;
+  classNameBubble?: string;
 };
 
 const formatDate = (date: Date): string => {
@@ -445,8 +447,12 @@ const InputNavi = (InputNaviProps: InputNaviProps) => {
   return (
     <Dropdown
       className={[styles.outComponent, props.className].join(" ")}
-      classNameTitle={["row align-center", styles.Title].join(" ")}
-      classNameChildren={[styles.Children].join(" ")}
+      classNameTitle={[
+        "row align-center",
+        styles.Title,
+        props.classNameTitle,
+      ].join(" ")}
+      classNameChildren={[styles.Children, props.classNameBubble].join(" ")}
       title={
         <div className={[styles.outInput].join(" ")}>
           <div
