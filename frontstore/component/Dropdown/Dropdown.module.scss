@@ -61,8 +61,7 @@
     }
     &_bubbleClick {
       min-width: 350px;
-      height: max-content;
-      max-height: 500px;
+      height: fit-content;
       overflow-y: auto;
       background-color: transparent;
       position: absolute;

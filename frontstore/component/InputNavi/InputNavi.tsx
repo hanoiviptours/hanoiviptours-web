@@ -19,6 +19,7 @@ interface Option {
 }
 
 export type InputNaviProps = {
+  defaultValue?: string;
   optionInput?: Option[];
   onChange?: (value: string) => void;
   placeholder?: string;
@@ -91,6 +92,8 @@ const InputNavi = (InputNaviProps: InputNaviProps) => {
             selectedDateRange.endDate
           )}`
         : `${formatDate(selectedDate)}`
+      : props.defaultValue
+      ? props.defaultValue
       : ""
   );
 
@@ -204,7 +207,7 @@ const InputNavi = (InputNaviProps: InputNaviProps) => {
   const InputOption = () => {
     return (
       <input
-        className={["row align-center", styles.Text, props.classNameInput].join(
+        className={["row align-center", styles.Text, props.TextClassName].join(
           " "
         )}
         value={valueInput}
@@ -216,7 +219,7 @@ const InputNavi = (InputNaviProps: InputNaviProps) => {
   const InputDate = () => {
     return (
       <div
-        className={["row align-center", styles.Text, props.classNameInput].join(
+        className={["row align-center", styles.Text, props.TextClassName].join(
           " "
         )}
         onChange={handleChange}
@@ -228,7 +231,7 @@ const InputNavi = (InputNaviProps: InputNaviProps) => {
   const InputUnit = () => {
     return (
       <div
-        className={["row align-center", styles.Text, props.classNameInput].join(
+        className={["row align-center", styles.Text, props.TextClassName].join(
           " "
         )}
         onChange={handleChange}
@@ -288,7 +291,9 @@ const InputNavi = (InputNaviProps: InputNaviProps) => {
             }}
           />
         )}
-        <div className={[styles.button].join(" ")}>
+        <div
+          className={["row align-center justify-end", styles.button].join(" ")}
+        >
           <Button
             className={[styles.submit].join(" ")}
             color={"fill"}
@@ -313,86 +318,103 @@ const InputNavi = (InputNaviProps: InputNaviProps) => {
   };
 
   const childrenUnit = () => {
-    return valueUnit.map((item: any, key: Key) => {
-      return (
-        <div className={[styles.option].join(" ")} key={key}>
-          <div className={["row", styles.name].join(" ")}>{item.name}</div>
-          {item.select &&
-            item.select.map((el: any, reKey: Key) => {
-              return (
-                <div
-                  className={["row", styles.select].join(" ")}
-                  key={reKey}
-                  onClick={() => {
-                    if (Unit.class.includes(el)) {
-                      setUnit({
-                        ...Unit,
-                        class: Unit.class.filter((gl: any) => gl !== el),
-                      });
-                    } else {
-                      setUnit({
-                        ...Unit,
-                        class: [...Unit.class, el],
-                      });
-                    }
-                  }}
-                >
-                  <input
-                    className={[styles.radio].join(" ")}
-                    type={"radio"}
-                    checked={Unit.class.includes(el)}
-                  />
-                  {el}
-                </div>
-              );
-            })}
-
-          {item.selectValue &&
-            item.selectValue.map((el: any, reKey: Key) => {
-              return (
-                <div
-                  className={[
-                    "row align-center justify-between",
-                    styles.selectValue,
-                  ].join(" ")}
-                  key={reKey}
-                >
-                  <div className={[styles.selectName].join(" ")}>
-                    <div className={[styles.titleSelect].join(" ")}>
-                      {el.title}
-                    </div>
-                    <div className={[styles.subTitleSelect].join(" ")}>
-                      {el.subTitle}
-                    </div>
-                  </div>
-
-                  <div className={["row", styles.value].join(" ")}>
-                    <Icon
-                      className={[, styles.icon].join(" ")}
-                      icon={"faCircleMinus"}
+    return (
+      <>
+        {valueUnit.map((item: any, key: Key) => {
+          return (
+            <div className={[styles.option].join(" ")} key={key}>
+              <div className={["row", styles.name].join(" ")}>{item.name}</div>
+              {item.select &&
+                item.select.map((el: any, reKey: Key) => {
+                  return (
+                    <div
+                      className={["row", styles.select].join(" ")}
+                      key={reKey}
                       onClick={() => {
-                        if (checkuantity(Unit.passenger, el.title) > 0) {
-                          updateQuantity(el.title, -1);
+                        if (Unit.class.includes(el)) {
+                          setUnit({
+                            ...Unit,
+                            class: Unit.class.filter((gl: any) => gl !== el),
+                          });
+                        } else {
+                          setUnit({
+                            ...Unit,
+                            class: [...Unit.class, el],
+                          });
                         }
                       }}
-                    />
-                    {checkuantity(Unit.passenger, el.title)}
-                    <Icon
-                      className={[, styles.icon].join(" ")}
-                      icon={"faCirclePlus"}
-                      onClick={() => {
-                        if (checkuantity(Unit.passenger, el.title) < 6) {
-                          updateQuantity(el.title, 1);
-                        }
-                      }}
-                    />
-                  </div>
-                </div>
-              );
-            })}
+                    >
+                      <input
+                        className={[styles.radio].join(" ")}
+                        type={"radio"}
+                        checked={Unit.class.includes(el)}
+                      />
+                      {el}
+                    </div>
+                  );
+                })}
+
+              {item.selectValue &&
+                item.selectValue.map((el: any, reKey: Key) => {
+                  return (
+                    <div
+                      className={[
+                        "row align-center justify-between",
+                        styles.selectValue,
+                      ].join(" ")}
+                      key={reKey}
+                    >
+                      <div className={[styles.selectName].join(" ")}>
+                        <div className={[styles.titleSelect].join(" ")}>
+                          {el.title}
+                        </div>
+                        <div className={[styles.subTitleSelect].join(" ")}>
+                          {el.subTitle}
+                        </div>
+                      </div>
+
+                      <div className={["row", styles.value].join(" ")}>
+                        <Icon
+                          className={[, styles.icon].join(" ")}
+                          icon={"faCircleMinus"}
+                          onClick={() => {
+                            if (checkuantity(Unit.passenger, el.title) > 0) {
+                              updateQuantity(el.title, -1);
+                            }
+                          }}
+                        />
+                        {checkuantity(Unit.passenger, el.title)}
+                        <Icon
+                          className={[, styles.icon].join(" ")}
+                          icon={"faCirclePlus"}
+                          onClick={() => {
+                            if (checkuantity(Unit.passenger, el.title) < 6) {
+                              updateQuantity(el.title, 1);
+                            }
+                          }}
+                        />
+                      </div>
+                    </div>
+                  );
+                })}
+            </div>
+          );
+        })}
+        <div
+          className={["row align-center justify-end", styles.button].join(" ")}
+        >
+          <Button
+            className={[styles.submit].join(" ")}
+            color={"fill"}
+            type={"button"}
+            children={"Hoàn thành"}
+            onClick={() => {
+              setOpen(false);
+            }}
+          />
         </div>
-      );
-    });
+      </>
+    );
   };
 
   //swtichCase
@@ -428,7 +450,10 @@ const InputNavi = (InputNaviProps: InputNaviProps) => {
       title={
         <div className={[styles.outInput].join(" ")}>
           <div
-            className={["row justify-between", styles.outTitleInput].join(" ")}
+            className={[
+              "row align-center justify-between",
+              styles.outTitleInput,
+            ].join(" ")}
           >
             <div className={[styles.TitleInput].join(" ")}>{props.title}</div>
             {props.type == "date" && (
@@ -447,7 +472,13 @@ const InputNavi = (InputNaviProps: InputNaviProps) => {
               </div>
             )}
           </div>
-          <div className={["row align-center", styles.InputNavi].join(" ")}>
+          <div
+            className={[
+              "row align-center",
+              styles.InputNavi,
+              props.classNameInput,
+            ].join(" ")}
+          >
             {props.icon && (
               <Icon
                 className={[styles.icon, props.iconClassName].join(" ")}
@@ -459,7 +490,9 @@ const InputNavi = (InputNaviProps: InputNaviProps) => {
         </div>
       }
       mode="bubbleClick"
-      bubblePosition="start"
+      bubblePosition={
+        props.type == "date" && roundTrip == true ? "mid" : "start"
+      }
       children={renderChildren(props.type)}
       onClick={(e: boolean) => {
         setOpen(e);

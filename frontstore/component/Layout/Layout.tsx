@@ -12,27 +12,18 @@ type LayoutProps = {
 const Layout = (LayoutProps: LayoutProps) => {
   const [props, setProps] = useState(LayoutProps);
 
+  const ref = useRef<any>(null);
+
   const [open, setOpen] = useState(false);
 
   const [openNavi, setOpenNavi] = useState(false);
 
-  const [valueScroll, setValueScroll] = useState(0);
-
   //function to action
-
-  const printScrollY = () => {
-    const currentScrollY = window.scrollY;
-    setValueScroll(currentScrollY);
-  };
 
   const handleOpen = () => {
     setOpen(!open);
     setOpenNavi(false);
   };
-
-  if (typeof window !== "undefined") {
-    window.addEventListener("scroll", printScrollY);
-  }
 
   const navigation = [
     { title: "Sản phẩm", children: "KeyDown" },
@@ -44,6 +35,20 @@ const Layout = (LayoutProps: LayoutProps) => {
   useEffect(() => {
     setProps(LayoutProps);
   }, [LayoutProps]);
+
+  useEffect(() => {
+    function handleClickOutside(event: any) {
+      if (ref.current && !ref.current.contains(event.target)) {
+        setOpenNavi(false);
+      }
+    }
+    // Bind the event listener
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      // Unbind the event listener on clean up
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [ref]);
 
   //Function to render
 
@@ -73,31 +78,34 @@ const Layout = (LayoutProps: LayoutProps) => {
 
   return (
     <div className={[styles.Layout].join(" ")}>
-      <Header
-        className={[styles.HeaderScroll, styles.openHeader].join(" ")}
-        navigation={navigation}
-        openNavi={() => {
-          setOpenNavi(!openNavi);
-        }}
-        onClickDrawer={() => {
-          handleOpen();
-        }}
-        style={
-          open
-            ? {
-                zIndex: "1",
-              }
-            : {
-                zIndex: "4",
-              }
-        }
-      />
-      {openNavi && (
-        <Navigation
-          className={[styles.Navigation, openNavi && styles.openNavi].join(" ")}
-          // clickOutside={()=>{setOpenNavi(false)}}
+      <div ref={ref} className={[styles.Header].join(" ")}>
+        <Header
+          className={[styles.HeaderScroll, styles.openHeader].join(" ")}
+          navigation={navigation}
+          openNavi={() => {
+            setOpenNavi(!openNavi);
+          }}
+          onClickDrawer={() => {
+            handleOpen();
+          }}
+          style={
+            open
+              ? {
+                  zIndex: "1",
+                }
+              : {
+                  zIndex: "4",
+                }
+          }
         />
-      )}
+        {openNavi && (
+          <Navigation
+            className={[styles.Navigation, openNavi && styles.openNavi].join(
+              " "
+            )}
+          />
+        )}
+      </div>
 
       <div className={[styles.children].join(" ")}>{props.children}</div>
 

@@ -1,51 +1,51 @@
 @import "../../styles/mixins";
 @import "../../styles/variables";
 
-
 .Layout {
   position: relative;
-  .children{
+  .children {
     margin-top: 75px;
   }
-  .HeaderScroll {
-    position: fixed;
-    right: 0;
-    left: 0;
-    height: 80px;
-    transition: 1s;
-    @include responsive_large() {
-      height: 95px;
+  .Header {
+    .HeaderScroll {
+      position: fixed;
+      right: 0;
+      left: 0;
+      height: 80px;
+      transition: 1s;
+      @include responsive_large() {
+        height: 95px;
+      }
+      @include responsive_small() {
+        opacity: 1;
+      }
+      @include responsive_mobile_l() {
+        height: 73px;
+      }
+      @include responsive_mobile_m() {
+        height: 63px;
+      }
     }
-    @include responsive_small() {
-      opacity: 1;
+    .openHeader {
+      top: 0;
     }
-    @include responsive_mobile_l() {
-      height: 73px;
+    .Navigation {
+      position: fixed;
+      padding: 10px;
+      background-color: $white;
+      box-shadow: 0 0 5px $black;
+      right: 0;
+      left: 0;
+      z-index: -1;
+      top: -100px;
+      height: 80px;
+      transition: 0.6s;
     }
-    @include responsive_mobile_m() {
-      height: 63px;
+    .openNavi {
+      z-index: 4;
+      top: 80px;
     }
   }
-  .openHeader {
-    top: 0;
-  }
-  .Navigation{
-    position: fixed;
-    padding: 10px;
-    background-color: $white;
-    box-shadow: 0 0 5px $black;
-    right: 0;
-    left: 0;
-    z-index: -1;
-    top:-100px;
-    height: 80px;
-    transition: 0.6s;
-  }
-  .openNavi{
-    z-index: 1;
-    top:80px;
-  }
-
   .SideDrawer {
     z-index: 5;
   }

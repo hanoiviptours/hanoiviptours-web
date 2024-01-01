@@ -1,0 +1,29 @@
+@import "../../styles/variables";
+@import "../../styles/mixins";
+
+.Flight{
+    .Search{
+        height: 170px;
+        padding: 0 10px;
+        background-color: $teal;
+        .InputNavi{
+            .outInput{
+                .Textbox{
+                    height: 45px;
+                    border: 0px;
+                }
+            }
+        }
+        .buttonSreachNavi{
+            padding: 28px 0 0 15px;
+            .button{
+                height: 45px;
+                width: 65px;
+                border-radius: 3px;
+                .iconButton{
+                    font-size: 25px;
+                }
+            }
+        }
+    }
+}
