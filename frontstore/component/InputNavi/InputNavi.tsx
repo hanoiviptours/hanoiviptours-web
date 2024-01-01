@@ -504,6 +504,11 @@ const InputNavi = (InputNaviProps: InputNaviProps) => {
         setOpen(e);
       }}
       state={open}
+      styleChildren={
+        props.type == "date" && roundTrip == false
+          ? { minWidth: "fit-content" }
+          : { minWidth: "100%" }
+      }
     />
   );
 };
