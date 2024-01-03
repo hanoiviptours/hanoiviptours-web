@@ -1,4 +1,4 @@
-import { CSSProperties, ReactNode, useState } from "react";
+import { CSSProperties, ReactNode, useState, useEffect, useRef } from "react";
 import styles from "./Dropdown.module.scss";
 
 export type DropdownProps = {
@@ -10,29 +10,51 @@ export type DropdownProps = {
   styleTitle?: CSSProperties;
   styleChildren?: CSSProperties;
   style?: CSSProperties;
-  stateDefault?: boolean;
-  onClick?: () => void;
+  onClick?: (e: boolean) => void;
   onTriggerActionOpen?: (open: Boolean) => void;
-  mode?: "bubble" | "drop" | "dropOff";
+  mode?: "bubble" | "drop" | "dropOff" | "bubbleClick";
   bubblePosition?: "start" | "mid" | "end";
   animationIcon?: (open: boolean) => ReactNode;
   disable?: boolean;
   cursorNoDrop?: boolean;
+  state?: boolean;
 };
 export const Dropdown = (DropdownProps: DropdownProps) => {
   // Define constant
   const [open, setOpen] = useState(
-    DropdownProps.stateDefault ? DropdownProps.stateDefault : false
+    DropdownProps.state ? DropdownProps.state : false
   );
+  const ref = useRef<any>(null);
 
   //Function to create
 
   //Function to action
   const handleOnClickTitle = () => {
     DropdownProps.mode == "drop" && setOpen(!open);
+    DropdownProps.mode == "bubbleClick" && setOpen(true);
+    DropdownProps.onClick && DropdownProps.onClick(true);
   };
 
   //Function hook
+  useEffect(() => {
+    setOpen(DropdownProps.state ? true : false);
+  }, [DropdownProps.state]);
+  useEffect(() => {
+    /**
+     * Alert if clicked on outside of element
+     */
+    function handleClickOutside(event: any) {
+      if (ref.current && !ref.current.contains(event.target)) {
+        setOpen(false);
+      }
+    }
+    // Bind the event listener
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      // Unbind the event listener on clean up
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [ref]);
 
   //Function to render
   const renderTitle = (title?: ReactNode) => {
@@ -80,6 +102,33 @@ export const Dropdown = (DropdownProps: DropdownProps) => {
     );
   };
 
+  const renderChildrenBubbleClick = (children: ReactNode) => {
+    return (
+      <div
+        className={[
+          styles[`Children_${DropdownProps.mode}`],
+          DropdownProps.bubblePosition &&
+            styles[`Bubble_${DropdownProps.bubblePosition}`],
+          DropdownProps.classNameChildren,
+        ].join(" ")}
+        style={
+          open == true
+            ? {
+                opacity: "1",
+                zIndex: "2",
+                ...DropdownProps.styleChildren,
+              }
+            : {
+                opacity: "0",
+                zIndex: "-1",
+                ...DropdownProps.styleChildren,
+              }
+        }
+      >
+        {children}
+      </div>
+    );
+  };
   const renderChildrenDrop = (children: ReactNode) => {
     return (
       <div
@@ -107,6 +156,8 @@ export const Dropdown = (DropdownProps: DropdownProps) => {
         return renderChildrenDrop(DropdownProps.children);
       case "dropOff":
         return renderChildrenDropOff(DropdownProps.children);
+      case "bubbleClick":
+        return renderChildrenBubbleClick(DropdownProps.children);
       default:
         return renderChildrenDrop(DropdownProps.children);
     }
@@ -123,6 +174,7 @@ export const Dropdown = (DropdownProps: DropdownProps) => {
           ? { ...DropdownProps.style, cursor: "no-drop" }
           : { ...DropdownProps.style, cursor: "pointer" }
       }
+      ref={ref}
     >
       <>
         {renderTitle(DropdownProps.title)}

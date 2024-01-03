@@ -1,0 +1,146 @@
+@import "../../styles/mixins";
+@import "../../styles/variables";
+
+.outComponent {
+  width: 100%;
+  border-radius: 6px;
+  .Title {
+    width: 100%;
+    .outInput {
+      width: inherit;
+      padding: 10px;
+      .outTitleInput {
+        padding-bottom: 10px;
+        position: relative;
+        font-size: 18px;
+        .TitleInput {
+        }
+        .Check {
+          padding-right: 30px;
+          .CheckBox {
+            position: absolute;
+            cursor: pointer;
+            accent-color: $cyan;
+            width: 22px;
+            height: 22px;
+            right: -2px;
+            top: -6px;
+          }
+        }
+      }
+      .icon {
+        padding-left: 15px;
+      }
+      .InputNavi {
+        min-height: 38px;
+        background-color: $white;
+        border-radius: 3px;
+        border: 1px solid;
+        box-shadow: 0 0 1px $gray;
+        overflow: hidden;
+        &:focus-within {
+          box-shadow: 0 0 8px $inputFocus;
+          /* Larger box-shadow on focus-within */
+        }
+
+        .Text {
+          padding: 0px 8px;
+          width: inherit;
+          border: none;
+          outline: none;
+          flex: 1;
+          font-size: 1rem;
+          margin-left: 5px;
+          height: 1.1rem;
+          line-height: 1.1rem;
+          overflow: hidden;
+          text-overflow: ellipsis;
+
+          &_number::-webkit-outer-spin-button,
+          &_number::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+          }
+        }
+      }
+    }
+  }
+  .Children {
+    max-width: fit-content;
+    max-height: 450px;
+    background-color: $white;
+    border-radius: 6px;
+    margin: -5px 0px 0px 5px;
+    box-shadow: 0 0 5px $black;
+    .option {
+      .name {
+        font-size: 18px;
+        font-weight: 600;
+        padding: 10px 0;
+      }
+      .select {
+        cursor: pointer;
+        padding: 5px;
+        border-radius: 6px;
+        &:hover {
+          background-color: $option;
+        }
+        .radio {
+          margin-top: -2px;
+          accent-color: $cyan;
+        }
+      }
+      .selectValue {
+        padding: 5px;
+        border-bottom: 1px solid $gray;
+        .selectName {
+          .titleSelect {
+            font-size: 17px;
+          }
+          .subTitleSelect {
+            padding-top: 3px;
+            font-size: 14px;
+            color: $gray;
+          }
+        }
+        .value {
+          .icon {
+            color: $cyan;
+            padding: 0 13px;
+          }
+        }
+      }
+    }
+    .button {
+      padding: 20px 10px 5px 0px;
+      .submit {
+        background-color: $cyan;
+        font-weight: 600;
+        padding: 10px;
+        border-radius: 6px;
+        width: 140px;
+      }
+    }
+    .outDate {
+      display: inline-block;
+      height: fit-content;
+      overflow-y: auto;
+      .button {
+        .submit {
+          background-color: $cyan;
+          margin-right: 10px;
+          border-radius: 6px;
+          padding: 10px;
+          width: 80px;
+          font-weight: 600;
+        }
+        .clear {
+          border-radius: 6px;
+          padding: 10px;
+          width: 60px;
+          font-weight: 600;
+        }
+      }
+    }
+  }
+}

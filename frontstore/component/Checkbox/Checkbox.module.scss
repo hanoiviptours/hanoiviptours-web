@@ -1,0 +1,21 @@
+@import "../../styles/variables";
+.CheckBox {
+  .CheckOption {
+    margin: 0 5px;
+    &_checkbox {
+      &_radio {
+      }
+      &_checkbox {
+      }
+    }
+    &_color {
+      width: 25px;
+      height: 25px;
+      border-radius: 50%;
+      border: 1px solid transparent;
+    }
+  }
+  .Option {
+    padding: 0 5px;
+  }
+}
