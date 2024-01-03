@@ -27,6 +27,8 @@ import { Dropdown } from "./Dropdown";
 export type { DropdownProps } from "./Dropdown";
 import { Icon } from "./Icon";
 export type { IconProps } from "./Icon";
+import { Checkbox } from "./Checkbox";
+export type { CheckboxProps } from "./Checkbox";
 
 export {
   Layout,
@@ -43,5 +45,6 @@ export {
   Filter,
   SideDrawer,
   Dropdown,
-  Icon
+  Icon,
+  Checkbox,
 };

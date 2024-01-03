@@ -22,7 +22,21 @@ const Test = () => {
         styles.DropDownHeader,
       ].join(" ")}
     >
-      <InputNavi icon={"faUser"} title={"vị trí"} optionInput={Option} type={"date"}/>
+      <InputNavi
+        icon={"faUser"}
+        title={"vị trí"}
+        optionInput={Option}
+        type={"date"}
+      />
+
+        <Card
+          className={[styles.Card].join(" ")}
+          image={Image}
+          title="sạdahda"
+          vote={4.5}
+          price={82734829}
+          type="Product"
+        />
     </div>
   );
 };

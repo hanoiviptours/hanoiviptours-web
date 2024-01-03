@@ -1,33 +1,48 @@
-@import "../../styles/mixins";
 @import "../../styles/variables";
+@import "../../styles/mixins";
 
-
-.Filter {
-  display: flex;
-  flex-direction: column;
-  .Title {
-    font-size: 1em;
-    font-weight: 600;
+.ComponentFilter {
+  .ModalTitle {
+    text-align: center;
+    font-weight: 700;
   }
-  .Divider {
-    height: 3px;
-    background-color: rgba(0, 0, 0, 0.1);
-    margin: 0.6em 0 0.6em;
-    width: 100%;
-    max-width: 30px;
-  }
-  .List {
-    padding: 3px 0;
-    &:hover {
-      color: $textOrange;
-      transition: 0.2s;
+  .Filter {
+    .Search {
+      margin: 10px;
     }
-    margin-top: 10px;
+    .ShowMore {
+      color: $blue;
+      cursor: pointer;
+      margin: 10px;
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+    .Title {
+      padding: 5px;
+      cursor: pointer;
+      &:hover {
+        text-decoration: underline;
+      }
+    }
   }
-  .Focus {
-    padding: 3px 0;
-    color: $black;
-    font-weight: bolder;
-    margin-top: 10px;
+  .Button {
+    border-radius: 15px;
+    cursor: pointer;
+    width: fit-content;
+    border: none;
+    margin: 2px;
+  }
+}
+.Body {
+  :global {
+    .ReactModal__Content {
+      @include responsive_extra_large() {
+        width: calc(80% - 40px);
+      }
+      // @include responsive_large() {
+      //   width: calc(100% - 40px);
+      // }
+    }
   }
 }
