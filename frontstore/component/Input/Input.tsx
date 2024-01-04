@@ -1,27 +1,21 @@
-import React, { useState, useEffect, CSSProperties } from "react";
-import styles from "./Input.module.scss";
-import { Button } from "..";
-import { type } from "os";
+import React, { useState, useEffect, CSSProperties } from 'react';
+import styles from './Input.module.scss';
+import { Button } from '..';
+import { type } from 'os';
 
 export type InputProps = {
   value?: string;
   defaultValue?: any;
   onPressEnter?: (value: string) => void;
   onClick?: () => void;
-  onChange?: (value: string) => void;
+  onChange?: ({ value, name }: any) => void;
   className?: string;
   classNameInput?: string;
   placeholder?: string;
   prefix?: string;
   suffix?: string;
-  type?:
-    | "text"
-    | "email"
-    | "password"
-    | "number"
-    | "textarea"
-    | "file";
-  shape?: "standard" | "default";
+  type?: 'text' | 'email' | 'password' | 'number' | 'textarea' | 'file';
+  shape?: 'standard' | 'default';
   disabled?: boolean;
   offBorder?: boolean;
   clear?: boolean;
@@ -29,7 +23,8 @@ export type InputProps = {
   eyePassword?: boolean;
   iconClassName?: string;
   TextClassName?: string;
-  key?:any;
+  key?: any;
+  name?: string;
 };
 
 const Input = (InputProps: InputProps) => {
@@ -37,11 +32,7 @@ const Input = (InputProps: InputProps) => {
   const [props, setProps] = useState(InputProps);
   const [visible, setVisible] = useState(true);
   const [valueInput, setValueInput] = useState<string>(
-    props.defaultValue
-      ? props.defaultValue
-      : props.value
-      ? props.value
-      : ""
+    props.defaultValue ? props.defaultValue : props.value ? props.value : ''
   );
   //function to create
 
@@ -53,7 +44,8 @@ const Input = (InputProps: InputProps) => {
   };
   const handleChange = (e: any) => {
     setValueInput(e.target.value);
-    props.onChange && props.onChange(e.target.value);
+    props.onChange &&
+      props.onChange({ name: e.target.name, value: e.target.value });
   };
 
   const handleVisible = () => {
@@ -71,7 +63,7 @@ const Input = (InputProps: InputProps) => {
   const renderTextArea = () => {
     return (
       <textarea
-        className={[styles.Text, props.classNameInput].join(" ")}
+        className={[styles.Text, props.classNameInput].join(' ')}
         value={valueInput}
         onChange={handleChange}
         placeholder={props.placeholder}
@@ -83,12 +75,13 @@ const Input = (InputProps: InputProps) => {
     return (
       <input
         type={type}
+        name={props.name}
         className={[
           styles.Text,
           props.classNameInput,
           styles[`Text_${props.type}`],
           props.TextClassName,
-        ].join(" ")}
+        ].join(' ')}
         placeholder={props.placeholder}
         value={valueInput}
         onChange={handleChange}
@@ -100,11 +93,9 @@ const Input = (InputProps: InputProps) => {
     );
   };
 
-
-
   const renderInput = (type: any) => {
     switch (type) {
-      case "textarea":
+      case 'textarea':
         return renderTextArea();
       default:
         return renderText(type);
@@ -114,23 +105,23 @@ const Input = (InputProps: InputProps) => {
   return (
     <div
       className={[
-        "row align-center",
+        'row align-center',
         styles.Input,
         props.className,
         props.shape && styles[`Shape_${props.shape}`],
-      ].join(" ")}
+      ].join(' ')}
       onClick={props.onClick}
       style={
         props.offBorder
           ? {
-              border: "none",
-              padding: "0px",
-              boxShadow: "none",
-              width: "100%",
+              border: 'none',
+              padding: '0px',
+              boxShadow: 'none',
+              width: '100%',
               ...props.style,
             }
           : {
-              width: "100%",
+              width: '100%',
               ...props.style,
             }
       }
@@ -138,24 +129,24 @@ const Input = (InputProps: InputProps) => {
     >
       {props.prefix && (
         <i
-          className={[props.prefix, styles.Icon, props.iconClassName].join(" ")}
+          className={[props.prefix, styles.Icon, props.iconClassName].join(' ')}
         />
       )}
       {renderInput(
-        props.type == "password" ? (visible ? props.type : "text") : props.type
+        props.type == 'password' ? (visible ? props.type : 'text') : props.type
       )}
-      {props.type == "password" && props.eyePassword && (
+      {props.type == 'password' && props.eyePassword && (
         <i
           className={[
-            visible ? "bi bi-eye-slash" : "fbi bi-eye",
+            visible ? 'bi bi-eye-slash' : 'fbi bi-eye',
             styles.Clear,
-          ].join(" ")}
+          ].join(' ')}
           onClick={handleVisible}
         />
       )}
       {props.suffix && (
         <i
-          className={[props.suffix, styles.Icon, props.iconClassName].join(" ")}
+          className={[props.suffix, styles.Icon, props.iconClassName].join(' ')}
         />
       )}
     </div>
@@ -164,6 +155,7 @@ const Input = (InputProps: InputProps) => {
 
 export { Input };
 Input.defaultProps = {
-  shape: "default",
+  shape: 'default',
   disabled: false,
+  onChange: () => null,
 };

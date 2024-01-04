@@ -1,0 +1,77 @@
+@import '../../../styles/mixins';
+@import '../../../styles/variables';
+
+.FormsLogin {
+  .btnClosed {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 15px;
+
+    .closed {
+      cursor: pointer;
+      max-width: 16px;
+    }
+  }
+  .InputNavi {
+    padding-bottom: 20px;
+    .TitleInput {
+      padding-bottom: 10px;
+      font-size: 14px;
+    }
+    .outInput {
+      .Input {
+        height: 38px;
+        border-radius: 3px;
+        border: 1px solid $gray;
+      }
+    }
+  }
+
+  .Forms {
+    max-width: 425px;
+    margin: 0 auto;
+    .Title {
+      margin-bottom: 20px;
+      font-size: 24px;
+      font-weight: normal;
+    }
+    .Policy {
+      margin-bottom: 30px;
+      font-size: 14px;
+      .Text {
+        color: #212121;
+        .Link {
+          color: rgb(25, 118, 210);
+          text-decoration: underline;
+        }
+      }
+    }
+    .Forgot {
+      display: flex;
+      margin-bottom: 20px;
+
+      .Link {
+        color: rgb(25, 118, 210);
+        margin-left: auto;
+      }
+    }
+    .Action {
+      width: 260px;
+      height: 42px;
+      margin: 0 auto;
+      margin-bottom: 20px;
+      .button {
+        box-shadow: none;
+      }
+    }
+    .Register {
+      text-align: center;
+
+      .Label {
+        color: rgb(25, 118, 210);
+        margin-left: auto;
+        cursor: pointer;
+      }
+    }
+  }
+}
