@@ -54,16 +54,6 @@ export const Filter = (FilterProps: FilterProps) => {
   const [open, setOpen] = useState(false);
   const [valueForm, setValueForm] = useState(initValueForm(props.data));
   const [searchTerm, setSearchTerm] = useState<any>(initInput(props.data));
-  const customStyles = {
-    content: {
-      top: "50%",
-      left: "50%",
-      transform: "translate(-50%, -50%)",
-      borderRadius: "7px",
-      transition: "opacity 2000ms ease-in-out",
-    },
-  };
-
   //function to create
 
   //function to action
@@ -94,74 +84,6 @@ export const Filter = (FilterProps: FilterProps) => {
   }, [props.value]);
 
   //function to render
-  const renderModal = () => {
-    return (
-      <Modal
-        isOpen={open}
-        onRequestClose={handleOpen}
-        portalClassName={styles.Body}
-        style={customStyles}
-      >
-        <h1 className={styles.ModalTitle}>Filter & Sort</h1>
-        {props.data &&
-          props.data.length > 0 &&
-          props.data.map((item: any, key: Key) => {
-            return (
-              <Dropdown
-                key={key}
-                classNameTitle={styles.Title}
-                title={<h1>{item.title}</h1>}
-                onClick={handleOpen}
-                classNameChildren={styles.Children}
-                animationIcon={(value: boolean) =>
-                  value == open ? (
-                    <Icon icon={"faChevronUp"} />
-                  ) : (
-                    <Icon icon={"faChevronDown"} />
-                  )
-                }
-                children={
-                  <>
-                    {item.options && item.options.length > 10 && (
-                      <Input
-                        className={styles.Search}
-                        onChange={(value: any) => {
-                          handleSearch(value, item.title);
-                        }}
-                      />
-                    )}
-                    <Checkbox
-                      direction="horizontal"
-                      options={item.options.filter((el: any) =>
-                        el.label.toLowerCase().includes(searchTerm[item.title])
-                      )}
-                      type={item.type}
-                      onChange={(value: any) => {
-                        handleChangeForm(item.title, value);
-                        item.onChange && item.onChange(value);
-                      }}
-                      defaultValue={valueForm[item.title]}
-                    />
-                  </>
-                }
-                mode={"drop"}
-              />
-            );
-          })}
-      </Modal>
-    );
-  };
-
-  const renderButton = () => {
-    return (
-      <Button
-        children={<Icon icon={"faBarsStaggered"} />}
-        className={[styles.Button].join(" ")}
-        borderRadius={"round"}
-        onClick={handleOpen}
-      />
-    );
-  };
 
   const renderFilter = (direction: "horizontal" | "vertical") => {
     return (
@@ -227,7 +149,7 @@ export const Filter = (FilterProps: FilterProps) => {
                 />
                 <Divider
                   style={{
-                    margin: direction == "horizontal" ? "1.5rem 0" : "0.5rem 0",
+                    margin: direction == "horizontal" ? "1.5rem 0" : "1rem 0",
                   }}
                 />
               </div>
@@ -240,8 +162,7 @@ export const Filter = (FilterProps: FilterProps) => {
 
   return (
     <div className={styles.ComponentFilter}>
-      {props.size == "small" ? renderButton() : renderFilter("vertical")}
-      {renderModal()}
+      {renderFilter("vertical")}
     </div>
   );
 };
