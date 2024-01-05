@@ -217,6 +217,10 @@ export const SlickHeader = (SlickHeaderProps: SlickHeaderProps) => {
     setOpenModalSlick(!openModalSlick);
   };
 
+  if (openModalSlick == true) {
+    window.scrollTo(0, 300);
+  }
+
   const handleArrowClick = (direction: any) => {
     if (direction === "next") {
       slider.current?.slickNext();

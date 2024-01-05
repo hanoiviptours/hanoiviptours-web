@@ -29,6 +29,8 @@ import { Icon } from "./Icon";
 export type { IconProps } from "./Icon";
 import { Checkbox } from "./Checkbox";
 export type { CheckboxProps } from "./Checkbox";
+import { SliderFilter } from "./SliderFilter";
+export type { SliderFilterProps } from "./SliderFilter";
 
 export {
   Layout,
@@ -47,4 +49,5 @@ export {
   Dropdown,
   Icon,
   Checkbox,
+  SliderFilter,
 };

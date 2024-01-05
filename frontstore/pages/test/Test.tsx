@@ -1,13 +1,27 @@
 import React, { Key, useEffect, useState } from "react";
 import styles from "./Test.module.scss";
 import { CartAtom, LoadingAtom } from "../../atom";
-import { Button, Card, Dropdown, Filter, SlickHeader } from "../../component";
+import {
+  Button,
+  Card,
+  Dropdown,
+  Filter,
+  SlickHeader,
+  SliderFilter,
+} from "../../component";
 import { Slickimage } from "../../component/Slickimage";
 import { InputNavi } from "../../component/InputNavi";
 
 const Test = () => {
   const [data1, setData1] = useState<any>([]);
   const [open, setOpen] = useState<boolean>(false);
+
+  const [slider, setSlider] = useState([0, 10000]);
+
+  const onChangeSlider = (value: any) => {
+    setSlider(value);
+  };
+
   const fakeData: any = [
     {
       title: "checkbox",
@@ -63,6 +77,13 @@ const Test = () => {
           console.log(e);
         }}
         data={fakeData}
+      />
+
+      <SliderFilter
+        min={0}
+        max={10000}
+        value={slider}
+        onChange={(value) => {onChangeSlider(value)}}
       />
     </div>
   );
