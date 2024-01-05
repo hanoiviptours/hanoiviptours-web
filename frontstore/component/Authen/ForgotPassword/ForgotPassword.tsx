@@ -1,18 +1,15 @@
 import React, { useRef, useState } from 'react';
 import ReactModal from 'react-modal';
-import styles from './Login.module.scss';
-import { Input } from '../../Input';
+import styles from './ForgotPassword.module.scss';
 import { clearAllBodyScrollLocks, disableBodyScroll } from 'body-scroll-lock';
-import { Button } from '../../Button';
-import { useRecoilCallback } from 'recoil';
-import { loginSelector } from '../../../atom/login/selector';
+import { Input } from '../../Input';
 import { Icon } from '../../Icon';
+import { Button } from '../../Button';
 
 export type LoginProps = {
   isOpen: boolean;
   onCloseModal: () => void;
   openModalRegister: () => void;
-  openModalForgotPassword: () => void;
 };
 
 const defaultProps = {
@@ -26,31 +23,23 @@ const customStyles = {
     transform: 'translate(-50%, -50%)',
     borderRadius: '7px',
     transition: 'opacity 2000ms ease-in-out',
-    width: '640px',
-    height: '450px',
+    width: '500px',
+    height: '400px',
   },
   overlay: { zIndex: 5 },
 };
 
-const Login = ({
+const ForgotPassword = ({
   isOpen,
   onCloseModal,
   openModalRegister,
-  openModalForgotPassword,
 }: LoginProps) => {
   const modalContainerRef = useRef(null);
   const [inputValue, setInputValue] = useState<{
-    userName: string;
-    password: string;
-  }>({ userName: '', password: '' });
+    phone: string;
+  }>({ phone: '' });
 
   //example
-
-  const login = useRecoilCallback((callbackHelpers) => async () => {
-    return await callbackHelpers.snapshot.getPromise(
-      loginSelector({ url: 'https://api.example.com/post', data: inputValue })
-    );
-  });
 
   const handleModalOpened = () => {
     if (modalContainerRef.current) disableBodyScroll(modalContainerRef.current);
@@ -58,14 +47,11 @@ const Login = ({
 
   const handleModalClosed = () => {
     clearAllBodyScrollLocks();
+    onCloseModal();
   };
 
   const handleOnChange = ({ value, name }: any) => {
     setInputValue({ ...inputValue, [name]: value });
-  };
-
-  const handleSubmitForm = () => {
-    login();
   };
 
   return (
@@ -84,7 +70,14 @@ const Login = ({
           />
         </div>
         <div className={styles.Forms}>
-          <p className={styles.Title}>Đăng nhập HN Partner qua</p>
+          <p className={styles.Title}>Quên mật khẩu</p>
+          <p className={styles.subTitle}>
+            Thay đổi mật khẩu bằng số điện thoại
+          </p>
+          <p className={styles.Description}>
+            Vui lòng nhập số điện thoại khách hàng đã đăng kí. Chúng tôi sẽ gửi
+            mã OTP tới điện thoại của khách hàng để tạo mật khẩu mới
+          </p>
           <div className={['col', styles.InputNavi].join(' ')}>
             <div className={['row', styles.TitleInput].join(' ')}>
               Số điện thoại
@@ -99,50 +92,15 @@ const Login = ({
               />
             </div>
           </div>
-          <div className={['col', styles.InputNavi].join(' ')}>
-            <div className={['row', styles.TitleInput].join(' ')}>Mật khẩu</div>
-            <div className={['row', styles.outInput].join(' ')}>
-              <Input
-                className={styles.Input}
-                placeholder="******"
-                name="password"
-                type="password"
-                onChange={handleOnChange}
-              />
-            </div>
-          </div>
-          <div className={styles.Policy}>
-            <p className={styles.Text}>
-              Khi đăng ký, tôi đồng ý với các{' '}
-              <a href="#" className={styles.Link}>
-                Điều khoản sử dụng
-              </a>{' '}
-              và{' '}
-              <a href="#" className={styles.Link}>
-                Chính sách bảo mật thông tin
-              </a>{' '}
-              của Partner.
-            </p>
-          </div>
-          <div className={styles.Forgot}>
-            <a
-              href="#"
-              className={styles.Link}
-              onClick={openModalForgotPassword}
-            >
-              Quên mật khẩu
-            </a>
-          </div>
           <div className={styles.Action}>
             <Button
               borderRadius={'none'}
               color="fill"
-              className={[styles.button].join(' ')}
+              className={[styles.Button].join(' ')}
               type="submit"
               colorText="#ffffff"
-              onClick={handleSubmitForm}
             >
-              Đăng nhập
+              Đăng ký
             </Button>
           </div>
           <div className={styles.Register}>
@@ -159,6 +117,6 @@ const Login = ({
   );
 };
 
-Login.defaultProps = defaultProps;
+ForgotPassword.defaultProps = defaultProps;
 
-export default Login;
+export default ForgotPassword;

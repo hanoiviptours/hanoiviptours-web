@@ -4,6 +4,8 @@ import Image from 'next/image';
 import { Logo } from '../../../public/images';
 import { Button } from '../../Button';
 import Login from '../../Authen/Login/Login';
+import Register from '../../Authen/Register/Register';
+import ForgotPassword from '../../Authen/ForgotPassword/ForgotPassword';
 import useBoolean from '../../../hooks/useBoolean';
 
 interface navigation {
@@ -22,17 +24,44 @@ export type HeaderProps = {
 const Header = (HeaderProps: HeaderProps) => {
   //Define constant
   const [props, setProps] = useState(HeaderProps);
-  const { state, setToTrue, setToFalse } = useBoolean(false);
-  const Authen: boolean = false;
+  const {
+    state: isModalLogin,
+    setToTrue: setToTrueLogin,
+    setToFalse: setToFalseLogin,
+  } = useBoolean(false);
+  const {
+    state: isModalRegister,
+    setToTrue: setToTrueRegister,
+    setToFalse: setToFalseRegister,
+  } = useBoolean(false);
+  const {
+    state: isModalForgotPassword,
+    setToTrue: setToTrueForgotPassword,
+    setToFalse: setToFalseForgotPassword,
+  } = useBoolean(false);
 
-  //Funtion to action
+  const Authen: boolean = false;
 
   const handleOpen = () => {
     props.onClickDrawer && props.onClickDrawer();
   };
 
-  //Funtion to create
-  //Funtion to render
+  const handleShowModalLogin = () => {
+    setToTrueLogin();
+    setToFalseRegister();
+  };
+
+  const handleShowModalRegister = () => {
+    setToTrueRegister();
+    setToFalseLogin();
+    setToFalseForgotPassword();
+  };
+
+  const handleShowModalForgotPassword = () => {
+    setToTrueForgotPassword();
+    setToFalseLogin();
+  };
+
   const renderDraw = () => {
     return (
       <div
@@ -68,12 +97,17 @@ const Header = (HeaderProps: HeaderProps) => {
             ' '
           )}
         >
-          <div className={[styles.linkSignUp].join(' ')}>Đăng ký</div>
+          <div
+            className={[styles.linkSignUp].join(' ')}
+            onClick={setToTrueRegister}
+          >
+            Đăng ký
+          </div>
           <Button
             className={[styles.buttonSignIn].join(' ')}
             children={'Đăng nhập'}
             color="fill"
-            onClick={setToTrue}
+            onClick={setToTrueLogin}
           />
         </div>
       </div>
@@ -138,7 +172,22 @@ const Header = (HeaderProps: HeaderProps) => {
       style={props.style}
     >
       {renderHeader()}
-      <Login isOpen={state} onCloseModal={setToFalse} />
+      <Login
+        isOpen={isModalLogin}
+        onCloseModal={setToFalseLogin}
+        openModalRegister={handleShowModalRegister}
+        openModalForgotPassword={handleShowModalForgotPassword}
+      />
+      <Register
+        isOpen={isModalRegister}
+        onCloseModal={setToFalseRegister}
+        openModalLogin={handleShowModalLogin}
+      />
+      <ForgotPassword
+        isOpen={isModalForgotPassword}
+        onCloseModal={setToFalseForgotPassword}
+        openModalRegister={handleShowModalRegister}
+      />
     </div>
   );
 };
