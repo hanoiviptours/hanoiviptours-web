@@ -1,6 +1,5 @@
-@import "../../styles/mixins";
-@import "../../styles/variables";
-
+@import '../../styles/mixins';
+@import '../../styles/variables';
 
 .Input {
   border: 1px solid;
@@ -31,7 +30,6 @@
     outline: none;
     flex: 1;
     font-size: 1rem;
-    margin-left: 5px;
 
     &_number::-webkit-outer-spin-button,
     &_number::-webkit-inner-spin-button {
