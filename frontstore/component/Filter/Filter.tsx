@@ -77,6 +77,17 @@ export const Filter = (FilterProps: FilterProps) => {
     setSearchTerm((el: any) => ({ ...el, [option]: value }));
   };
 
+  const handleVote = (nameField: string, element: any) => {
+    if (!valueForm[nameField].includes(element)) {
+      handleChangeForm(nameField, [...valueForm[nameField], element]);
+    } else {
+      handleChangeForm(
+        nameField,
+        valueForm[nameField].filter((number: any) => number != element)
+      );
+    }
+  };
+
   //function to hook
   useEffect(() => {
     setProps(FilterProps);
@@ -192,21 +203,7 @@ export const Filter = (FilterProps: FilterProps) => {
                                     : styles.unchose,
                                 ].join(" ")}
                                 key={reKey}
-                                onClick={() => {
-                                  if (!valueForm[item.title].includes(el)) {
-                                    handleChangeForm(item.title, [
-                                      ...valueForm[item.title],
-                                      el,
-                                    ]);
-                                  } else {
-                                    handleChangeForm(
-                                      item.title,
-                                      valueForm[item.title].filter(
-                                        (number: any) => number != el
-                                      )
-                                    );
-                                  }
-                                }}
+                                onClick={() => handleVote(item.title, el)}
                               >
                                 {el}
                                 <Icon
