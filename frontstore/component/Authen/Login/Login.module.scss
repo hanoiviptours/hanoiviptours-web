@@ -2,16 +2,7 @@
 @import '../../../styles/variables';
 
 .FormsLogin {
-  .btnClosed {
-    display: flex;
-    justify-content: flex-end;
-    margin-bottom: 15px;
-
-    .closed {
-      cursor: pointer;
-      max-width: 16px;
-    }
-  }
+  padding-top: 30px;
   .InputNavi {
     padding-bottom: 20px;
     .TitleInput {
