@@ -24,6 +24,17 @@ const Test = () => {
 
   const fakeData: any = [
     {
+      title: "voteStar",
+      type: "voteStar",
+    },
+    {
+      title: "ranger",
+      type: "ranger",
+      minLength:0,
+      maxLength:10000,
+      defaultValue:[0,10000]
+    },
+    {
       title: "checkbox",
       type: "checkbox",
       options: [
@@ -80,6 +91,10 @@ const Test = () => {
       />
 
       <SliderFilter
+        className={[
+          "row align-center justify-center",
+          styles.DropDownHeader,
+        ].join(" ")}
         min={0}
         max={10000}
         value={slider}

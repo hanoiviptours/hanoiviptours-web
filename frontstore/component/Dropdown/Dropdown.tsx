@@ -18,6 +18,7 @@ export type DropdownProps = {
   disable?: boolean;
   cursorNoDrop?: boolean;
   state?: boolean;
+  offOutsite?: boolean;
 };
 export const Dropdown = (DropdownProps: DropdownProps) => {
   // Define constant
@@ -45,7 +46,7 @@ export const Dropdown = (DropdownProps: DropdownProps) => {
      */
     function handleClickOutside(event: any) {
       if (ref.current && !ref.current.contains(event.target)) {
-        setOpen(false);
+        !DropdownProps.offOutsite && setOpen(false);
       }
     }
     // Bind the event listener

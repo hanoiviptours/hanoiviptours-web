@@ -53,29 +53,28 @@ const SliderFilter = (SliderFilterProps: SliderFilterProps) => {
   }, [SliderFilterProps.value]);
   //main render
   return (
-    <ReactSlider
-      min={SliderFilterProps.min}
-      max={SliderFilterProps.max}
-      onSliderClick={SliderFilterProps.onClick}
-      className={[
-        styles["horizontal-slider"],
-        SliderFilterProps.className,
-      ].join(" ")}
-      thumbClassName={[
-        styles["example-thumb"],
-        SliderFilterProps.thumpClassName,
-      ].join(" ")}
-      trackClassName={[`${SliderFilterProps.highlightSelection}`].join(" ")}
-      value={
-        Array.isArray(sliderValue)
-          ? sliderValue.sort((a: any, b: any) => a - b)
-          : sliderValue
-      }
-      minDistance={SliderFilterProps.distance}
-      onChange={(value) => handleChange(value)}
-      step={SliderFilterProps.step}
-      pearling={SliderFilterProps.pearling}
-    />
+    <div className={["row align-center justify-center",styles.outSlider, SliderFilterProps.className].join(" ")}>
+      <ReactSlider
+        min={SliderFilterProps.min}
+        max={SliderFilterProps.max}
+        onSliderClick={SliderFilterProps.onClick}
+        className={[styles["horizontal-slider"]].join(" ")}
+        thumbClassName={[
+          styles["example-thumb"],
+          SliderFilterProps.thumpClassName,
+        ].join(" ")}
+        trackClassName={[`${SliderFilterProps.highlightSelection}`].join(" ")}
+        value={
+          Array.isArray(sliderValue)
+            ? sliderValue.sort((a: any, b: any) => a - b)
+            : sliderValue
+        }
+        minDistance={SliderFilterProps.distance}
+        onChange={(value) => handleChange(value)}
+        step={SliderFilterProps.step}
+        pearling={SliderFilterProps.pearling}
+      />
+    </div>
   );
 };
 

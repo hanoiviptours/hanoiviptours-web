@@ -19,10 +19,55 @@
       }
     }
     .Title {
+      width: inherit;
       padding: 5px;
+      position: relative;
+      font-size: 18px;
       cursor: pointer;
       &:hover {
         text-decoration: underline;
+      }
+      .valueRanger {
+        position: absolute;
+        color: $gray;
+        font-weight: 400;
+        right: 30px;
+        font-size: 15px;
+      }
+    }
+    .Children {
+      .outranger {
+        .ranger {
+          height: 15px;
+        }
+      }
+      .outinput {
+        .input {
+          border-radius: 3px;
+          padding: 7px 0;
+          margin: 5px;
+        }
+      }
+      .outVote {
+        padding: 10px 0;
+        .vote {
+          border: 1px solid $gray;
+          border-radius: 20px;
+          padding: 7px 0;
+          font-size: 20px;
+          margin: 0 5px;
+          .iconStar {
+            padding-left: 2px;
+          }
+        }
+        .chose {
+          color: $white;
+          background-color: $yellow;
+        }
+        .unchose {
+          color: $gray;
+          background-color: $white;
+        }
       }
     }
   }

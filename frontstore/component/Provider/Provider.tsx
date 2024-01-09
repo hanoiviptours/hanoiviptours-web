@@ -3,6 +3,7 @@ import {
   createContext,
   useContext,
   useState,
+  useCallback,
 } from "react";
 import Modal from "react-modal";
 import { useWidth } from "../GlobalFunc";
@@ -37,7 +38,7 @@ export const AuthProvider = ({ children }: any) => {
   };
 
   //Function to render
-  const renderModal = () => {
+  const renderModal = useCallback(() => {
     switch (typeModal) {
       case "signIn":
         return <></>;
@@ -48,7 +49,7 @@ export const AuthProvider = ({ children }: any) => {
       case "resetPW":
         return <></>;
     }
-  };
+  }, [typeModal]);
 
   //Main render
   return (
