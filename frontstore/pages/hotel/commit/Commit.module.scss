@@ -1,0 +1,12 @@
+@import "../../../styles/variables";
+@import "../../../styles/mixins";
+
+.Commit{
+  .outFilter{
+    .titleFilter{
+      padding: 30px 3px;
+      font-size: 22px;
+      font-weight: 600;
+    }
+  }
+}

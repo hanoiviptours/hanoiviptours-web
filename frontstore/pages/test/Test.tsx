@@ -1,18 +1,78 @@
 import React, { Key, useEffect, useState } from "react";
 import styles from "./Test.module.scss";
 import { CartAtom, LoadingAtom } from "../../atom";
-import { Button, Card, Dropdown, SlickHeader } from "../../component";
+import {
+  Button,
+  Card,
+  Dropdown,
+  Filter,
+  SlickHeader,
+  SliderFilter,
+} from "../../component";
 import { Slickimage } from "../../component/Slickimage";
 import { InputNavi } from "../../component/InputNavi";
 
 const Test = () => {
   const [data1, setData1] = useState<any>([]);
   const [open, setOpen] = useState<boolean>(false);
-  const Image = "https://gcs.tripi.vn/tripi-assets/mytour/images/bali.png";
 
-  const Option = [
-    { name: "Việt Nam", select: ["Hà Nội", "Hồ Chí Minh"] },
-    { name: "Thái Lan", select: ["BangKoc", "Tiwlen"] },
+  const [slider, setSlider] = useState([0, 10000]);
+
+  const onChangeSlider = (value: any) => {
+    setSlider(value);
+  };
+
+  const fakeData: any = [
+    {
+      title: "voteStar",
+      type: "voteStar",
+    },
+    {
+      title: "ranger",
+      type: "ranger",
+      minLength:0,
+      maxLength:10000,
+      defaultValue:[0,10000]
+    },
+    {
+      title: "checkbox",
+      type: "checkbox",
+      options: [
+        { label: "hoangvu", value: "hoangvu" },
+        { label: "hoan", value: "hoan" },
+        { label: "ska", value: "ska" },
+        { label: "cloud", value: "cloud" },
+        { label: "phone", value: "phone" },
+        { label: "checked", value: "checked" },
+        { label: "radio", value: "radio" },
+        { label: "red", value: "red" },
+        { label: "yellow", value: "yellow" },
+        { label: "blue", value: "blue" },
+        { label: "apple", value: "apple" },
+        { label: "drop", value: "drop" },
+        { label: "dmc", value: "dmc" },
+      ],
+    },
+    {
+      title: "Price",
+      type: "checkbox",
+      maxLength: 1,
+      options: [
+        { label: "Under 100000", value: "0 to 100000" },
+        { label: "100000 to 300000", value: "100000 to 300000" },
+        { label: "300000 to 500000", value: "300000 to 500000" },
+        { label: "500000 and above", value: "500000 and above" },
+      ],
+    },
+    {
+      title: "color",
+      type: "color",
+      options: [
+        { label: "red", value: "red", color: "red" },
+        { label: "yellow", value: "yellow", color: "yellow" },
+        { label: "blue", value: "blue", color: "blue" },
+      ],
+    },
   ];
 
   return (
@@ -22,21 +82,24 @@ const Test = () => {
         styles.DropDownHeader,
       ].join(" ")}
     >
-      <InputNavi
-        icon={"faUser"}
-        title={"vị trí"}
-        optionInput={Option}
-        type={"date"}
+      <Filter
+        size={"big"}
+        valuesFormOnChange={(e: any) => {
+          console.log(e);
+        }}
+        data={fakeData}
       />
 
-        <Card
-          className={[styles.Card].join(" ")}
-          image={Image}
-          title="sạdahda"
-          vote={4.5}
-          price={82734829}
-          type="Product"
-        />
+      <SliderFilter
+        className={[
+          "row align-center justify-center",
+          styles.DropDownHeader,
+        ].join(" ")}
+        min={0}
+        max={10000}
+        value={slider}
+        onChange={(value) => {onChangeSlider(value)}}
+      />
     </div>
   );
 };

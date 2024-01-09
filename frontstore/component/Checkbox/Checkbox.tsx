@@ -66,6 +66,7 @@ export const Checkbox = (CheckboxProps: CheckboxProps) => {
             return (
               <div
                 className={[
+                  styles.outOption,
                   CheckboxProps.direction == "vertical"
                     ? "col-12"
                     : "col-3 col-lg-4 col-md-6",

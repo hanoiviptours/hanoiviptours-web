@@ -1,14 +1,17 @@
 import React, { useEffect, useState, Key } from "react";
 import styles from "./Filter.module.scss";
 import { Dropdown } from "../Dropdown";
-import { Checkbox, Icon, Input, Button, Divider } from "../index";
+import { Checkbox, Icon, Input, Button, Divider, SliderFilter } from "../index";
 import Modal from "react-modal";
 
 interface data {
+  nameField?: string;
   title?: string;
-  type?: "checkbox" | "color";
+  type?: "checkbox" | "color" | "ranger" | "voteStar";
   options?: any;
   maxLength?: number;
+  minLength?: number;
+  state?: boolean;
 }
 
 export type FilterProps = {
@@ -54,18 +57,8 @@ export const Filter = (FilterProps: FilterProps) => {
   const [open, setOpen] = useState(false);
   const [valueForm, setValueForm] = useState(initValueForm(props.data));
   const [searchTerm, setSearchTerm] = useState<any>(initInput(props.data));
-  const customStyles = {
-    content: {
-      top: "50%",
-      left: "50%",
-      transform: "translate(-50%, -50%)",
-      borderRadius: "7px",
-      transition: "opacity 2000ms ease-in-out",
-    },
-  };
-
+  const star: number[] = [1, 2, 3, 4, 5];
   //function to create
-
   //function to action
   const handleOpen = () => {
     setOpen(!open);
@@ -84,6 +77,17 @@ export const Filter = (FilterProps: FilterProps) => {
     setSearchTerm((el: any) => ({ ...el, [option]: value }));
   };
 
+  const handleVote = (nameField: string, element: any) => {
+    if (!valueForm[nameField].includes(element)) {
+      handleChangeForm(nameField, [...valueForm[nameField], element]);
+    } else {
+      handleChangeForm(
+        nameField,
+        valueForm[nameField].filter((number: any) => number != element)
+      );
+    }
+  };
+
   //function to hook
   useEffect(() => {
     setProps(FilterProps);
@@ -94,74 +98,6 @@ export const Filter = (FilterProps: FilterProps) => {
   }, [props.value]);
 
   //function to render
-  const renderModal = () => {
-    return (
-      <Modal
-        isOpen={open}
-        onRequestClose={handleOpen}
-        portalClassName={styles.Body}
-        style={customStyles}
-      >
-        <h1 className={styles.ModalTitle}>Filter & Sort</h1>
-        {props.data &&
-          props.data.length > 0 &&
-          props.data.map((item: any, key: Key) => {
-            return (
-              <Dropdown
-                key={key}
-                classNameTitle={styles.Title}
-                title={<h1>{item.title}</h1>}
-                onClick={handleOpen}
-                classNameChildren={styles.Children}
-                animationIcon={(value: boolean) =>
-                  value == open ? (
-                    <Icon icon={"faChevronUp"} />
-                  ) : (
-                    <Icon icon={"faChevronDown"} />
-                  )
-                }
-                children={
-                  <>
-                    {item.options && item.options.length > 10 && (
-                      <Input
-                        className={styles.Search}
-                        onChange={(value: any) => {
-                          handleSearch(value, item.title);
-                        }}
-                      />
-                    )}
-                    <Checkbox
-                      direction="horizontal"
-                      options={item.options.filter((el: any) =>
-                        el.label.toLowerCase().includes(searchTerm[item.title])
-                      )}
-                      type={item.type}
-                      onChange={(value: any) => {
-                        handleChangeForm(item.title, value);
-                        item.onChange && item.onChange(value);
-                      }}
-                      defaultValue={valueForm[item.title]}
-                    />
-                  </>
-                }
-                mode={"drop"}
-              />
-            );
-          })}
-      </Modal>
-    );
-  };
-
-  const renderButton = () => {
-    return (
-      <Button
-        children={<Icon icon={"faBarsStaggered"} />}
-        className={[styles.Button].join(" ")}
-        borderRadius={"round"}
-        onClick={handleOpen}
-      />
-    );
-  };
 
   const renderFilter = (direction: "horizontal" | "vertical") => {
     return (
@@ -174,8 +110,33 @@ export const Filter = (FilterProps: FilterProps) => {
               <div key={key}>
                 <Dropdown
                   className={styles.Filter}
-                  classNameTitle={styles.Title}
-                  title={<h1>{item.title}</h1>}
+                  classNameTitle={[
+                    "row align-center justify-between",
+                    styles.Title,
+                  ].join(" ")}
+                  state={item.state ? item.state : true}
+                  offOutsite={true}
+                  title={
+                    item.type == "ranger" ? (
+                      <>
+                        {item.nameField}
+                        <div className={[styles.valueRanger].join(" ")}>
+                          {valueForm[`${item.title}`] &&
+                          valueForm[`${item.title}`].length > 0
+                            ? `${valueForm[
+                                `${item.title}`
+                              ][0].toLocaleString()} đ - ${valueForm[
+                                `${item.title}`
+                              ][1].toLocaleString()} đ`
+                            : item.defaultValue
+                            ? `${item.defaultValue[0].toLocaleString()} đ - ${item.defaultValue[1].toLocaleString()} đ`
+                            : `${item.minLength.toLocaleString()} đ - ${item.maxLength.toLocaleString()} đ`}
+                        </div>
+                      </>
+                    ) : (
+                      <h1>{item.nameField}</h1>
+                    )
+                  }
                   onClick={handleOpen}
                   classNameChildren={styles.Children}
                   animationIcon={(value: boolean) => (
@@ -184,36 +145,101 @@ export const Filter = (FilterProps: FilterProps) => {
                   children={
                     <>
                       {item.options && item.options.length > 10 && (
-                        <Input
-                          onChange={(value: any) => {
-                            handleSearch(value, item.title);
-                          }}
-                        />
+                        <div
+                          className={["row align-center", styles.outinput].join(
+                            " "
+                          )}
+                        >
+                          <Input
+                            className={[styles.input].join(" ")}
+                            onChange={(value: any) => {
+                              handleSearch(value, item.title);
+                            }}
+                            type="text"
+                            placeholder="Nhập mục cần tìm"
+                          />
+                        </div>
                       )}
-                      <Checkbox
-                        options={
-                          direction == "vertical"
-                            ? item.options
-                                .filter((el: any) =>
+                      {item.type == "ranger" ? (
+                        <div
+                          className={[
+                            "row align-center justify-center",
+                            styles.outranger,
+                          ].join(" ")}
+                        >
+                          <SliderFilter
+                            className={[styles.ranger].join(" ")}
+                            min={item.minLength}
+                            max={item.maxLength}
+                            step={1000}
+                            value={
+                              valueForm[item.title] &&
+                              valueForm[item.title].length > 0
+                                ? valueForm[item.title]
+                                : item.defaultValue
+                                ? item.defaultValue
+                                : [item.minLength, item.maxLength]
+                            }
+                            onChange={(value: any) => {
+                              handleChangeForm(item.title, value);
+                            }}
+                          />
+                        </div>
+                      ) : item.type == "voteStar" ? (
+                        <div
+                          className={[
+                            "row align-center justify-center",
+                            styles.outVote,
+                          ].join(" ")}
+                        >
+                          {star.map((el: any, reKey: Key) => {
+                            return (
+                              <div
+                                className={[
+                                  "col row align-center justify-center",
+                                  styles.vote,
+                                  valueForm[item.title].includes(el)
+                                    ? styles.chose
+                                    : styles.unchose,
+                                ].join(" ")}
+                                key={reKey}
+                                onClick={() => handleVote(item.title, el)}
+                              >
+                                {el}
+                                <Icon
+                                  className={[styles.iconStar].join(" ")}
+                                  icon={"faStar"}
+                                />
+                              </div>
+                            );
+                          })}
+                        </div>
+                      ) : (
+                        <Checkbox
+                          options={
+                            direction == "vertical" && item.options
+                              ? item.options
+                                  .filter((el: any) =>
+                                    el.label
+                                      .toLowerCase()
+                                      .includes(searchTerm[item.title])
+                                  )
+                                  .slice(0, 10)
+                              : item.options.filter((el: any) =>
                                   el.label
                                     .toLowerCase()
                                     .includes(searchTerm[item.title])
                                 )
-                                .slice(0, 10)
-                            : item.options.filter((el: any) =>
-                                el.label
-                                  .toLowerCase()
-                                  .includes(searchTerm[item.title])
-                              )
-                        }
-                        type={item.type}
-                        maxLength={item.maxLength}
-                        onChange={(value: any) => {
-                          handleChangeForm(item.title, value);
-                        }}
-                        value={valueForm[item.title]}
-                        direction={direction}
-                      />
+                          }
+                          type={item.type}
+                          maxLength={item.maxLength}
+                          onChange={(value: any) => {
+                            handleChangeForm(item.title, value);
+                          }}
+                          value={valueForm[item.title]}
+                          direction={direction}
+                        />
+                      )}
                       {direction == "vertical" &&
                         item.options &&
                         item.options.length > 10 && (
@@ -227,7 +253,7 @@ export const Filter = (FilterProps: FilterProps) => {
                 />
                 <Divider
                   style={{
-                    margin: direction == "horizontal" ? "1.5rem 0" : "0.5rem 0",
+                    margin: direction == "horizontal" ? "1.5rem 0" : "1rem 0",
                   }}
                 />
               </div>
@@ -239,9 +265,6 @@ export const Filter = (FilterProps: FilterProps) => {
   //main render
 
   return (
-    <div className={styles.ComponentFilter}>
-      {props.size == "small" ? renderButton() : renderFilter("vertical")}
-      {renderModal()}
-    </div>
+    <div className={styles.ComponentFilter}>{renderFilter("vertical")}</div>
   );
 };

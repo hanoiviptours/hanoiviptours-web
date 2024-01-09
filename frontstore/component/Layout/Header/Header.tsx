@@ -4,7 +4,6 @@ import Image from 'next/image';
 import { Logo } from '../../../public/images';
 import { Button } from '../../Button';
 import Login from '../../Authen/Login/Login';
-import useBoolean from '../../../hooks/useBoolean';
 
 interface navigation {
   title: string;
@@ -22,8 +21,8 @@ export type HeaderProps = {
 const Header = (HeaderProps: HeaderProps) => {
   //Define constant
   const [props, setProps] = useState(HeaderProps);
-  const { state, setToTrue, setToFalse } = useBoolean(false);
   const Authen: boolean = false;
+  const [isOpenLogin, setIsOpenLogin] = useState<boolean>(false);
 
   //Funtion to action
 
@@ -31,6 +30,13 @@ const Header = (HeaderProps: HeaderProps) => {
     props.onClickDrawer && props.onClickDrawer();
   };
 
+  const handleShowModalLogin = () => {
+    setIsOpenLogin(true);
+  };
+
+  const handleClosedModalLogin = () => {
+    setIsOpenLogin(false);
+  };
   //Funtion to create
   //Funtion to render
   const renderDraw = () => {
@@ -73,7 +79,7 @@ const Header = (HeaderProps: HeaderProps) => {
             className={[styles.buttonSignIn].join(' ')}
             children={'Đăng nhập'}
             color="fill"
-            onClick={setToTrue}
+            onClick={handleShowModalLogin}
           />
         </div>
       </div>
@@ -138,7 +144,7 @@ const Header = (HeaderProps: HeaderProps) => {
       style={props.style}
     >
       {renderHeader()}
-      <Login isOpen={state} onCloseModal={setToFalse} />
+      <Login isOpen={isOpenLogin} onCloseModal={handleClosedModalLogin} />
     </div>
   );
 };
