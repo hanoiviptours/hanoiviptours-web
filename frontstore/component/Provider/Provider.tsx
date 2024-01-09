@@ -5,10 +5,11 @@ import {
   useState,
   useCallback,
 } from "react";
-import Modal from "react-modal";
 import { useWidth } from "../GlobalFunc";
 import { Icon } from "../Icon";
 import styles from "./Provider.module.scss";
+import ReactModal from "react-modal";
+import Login from "../Authen/Login/Login";
 
 const AuthContext = createContext<any>(undefined);
 
@@ -23,8 +24,8 @@ export const AuthProvider = ({ children }: any) => {
     "signIn" | "signUp" | "changePW" | "resetPW" | ""
   >("");
 
-  const handleOpenModal = (open: boolean) => {
-    setModal(open);
+  const handleOpenModal = () => {
+    setModal(true);
   };
 
   const handleOffModal = () => {
@@ -41,7 +42,7 @@ export const AuthProvider = ({ children }: any) => {
   const renderModal = useCallback(() => {
     switch (typeModal) {
       case "signIn":
-        return <></>;
+        return <Login />;
       case "signUp":
         return <></>;
       case "changePW":
@@ -51,63 +52,42 @@ export const AuthProvider = ({ children }: any) => {
     }
   }, [typeModal]);
 
+  const renderStyle = useCallback(() => {
+    switch (typeModal) {
+      case "signIn":
+        return {
+          content: {
+            top: "50%",
+            left: "50%",
+            transform: "translate(-50%, -50%)",
+            borderRadius: "7px",
+            transition: "opacity 2000ms ease-in-out",
+            width: "640px",
+            height: "450px",
+          },
+          overlay: { zIndex: 10 },
+        };
+      case "signUp":
+        return {};
+      case "changePW":
+        return {};
+      case "resetPW":
+        return {};
+    }
+  }, [typeModal]);
+
   //Main render
   return (
     <AuthContext.Provider
       value={{ modal, handleOpenModal, changeTypeModal, handleOffModal }}
     >
       {children}
-      <Modal
+      <ReactModal
         isOpen={modal}
+        style={renderStyle()}
         onRequestClose={() => {
           handleOffModal();
         }}
-        portalClassName={styles.body}
-        style={
-          useWidth() > 768
-            ? {
-                overlay: {
-                  position: "fixed",
-                  top: 0,
-                  left: 0,
-                  right: 0,
-                  bottom: 0,
-                  backgroundColor: "rgba(255, 255, 255, 0.75)",
-                  zIndex: "3",
-                },
-                content: {
-                  top: "50%",
-                  left: "50%",
-                  right: "auto",
-                  bottom: "auto",
-                  marginRight: "-10%",
-                  transform: "translate(-50%, -50%)",
-                  maxWidth: "450px",
-                  height: "Max-content",
-                  maxHeight: "90%",
-                  zIndex: "3",
-                },
-              }
-            : {
-                overlay: {
-                  position: "fixed",
-                  top: 0,
-                  left: 0,
-                  right: 0,
-                  bottom: 0,
-                  backgroundColor: "rgba(255, 255, 255, 0.75)",
-                  zIndex: "3",
-                },
-                content: {
-                  top: "0",
-                  left: "0",
-                  right: "0",
-                  bottom: "0",
-                  maxHeight: "95vh",
-                  zIndex: "3",
-                },
-              }
-        }
       >
         <div className={["row justify-end", styles.exitIcon].join(" ")}>
           <Icon
@@ -119,7 +99,7 @@ export const AuthProvider = ({ children }: any) => {
           />
         </div>
         {renderModal()}
-      </Modal>
+      </ReactModal>
     </AuthContext.Provider>
   );
 };
